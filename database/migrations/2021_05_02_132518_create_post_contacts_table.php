@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+class CreatePostContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,17 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('post_contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->integer('views');
+            $table->integer('id_post')->references('id')->on('posts');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('map');
+            $table->string('whatsapp');
+            $table->string('instagram');
             $table->string('created_by');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('updated_by');
             $table->timestamp('updated_at')->nullable();
         });
     }
@@ -32,6 +36,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('post_contacts');
     }
 }
