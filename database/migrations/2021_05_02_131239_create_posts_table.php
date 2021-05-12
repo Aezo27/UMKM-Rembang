@@ -18,9 +18,12 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->integer('views');
-            $table->string('created_by');
+            $table->integer('views')->default(0);
+            $table->string('status')->default('Aktif');
+            $table->string('id_category')->references('id')->on('categories')->nullable();;
+            $table->string('created_by')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
     }

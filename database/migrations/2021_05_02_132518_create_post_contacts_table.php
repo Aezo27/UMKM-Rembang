@@ -17,14 +17,15 @@ class CreatePostContactsTable extends Migration
         Schema::create('post_contacts', function (Blueprint $table) {
             $table->id();
             $table->integer('id_post')->references('id')->on('posts');
-            $table->string('phone');
-            $table->string('address');
-            $table->string('map');
-            $table->string('whatsapp');
-            $table->string('instagram');
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('map')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->string('instagram')->nullable();
+            $table->integer('clicked')->default(0);
             $table->string('created_by');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->string('updated_by');
+            $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
     }

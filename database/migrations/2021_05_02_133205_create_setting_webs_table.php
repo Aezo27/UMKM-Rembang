@@ -16,12 +16,12 @@ class CreateSettingWebsTable extends Migration
     {
         Schema::create('setting_webs', function (Blueprint $table) {
             $table->id();
-            $table->string('site_name');
-            $table->text('description');
-            $table->text('about');
-            $table->string('created_by');
+            $table->string('site_name')->nullable();
+            $table->text('description')->nullable();
+            $table->text('about')->nullable();
+            $table->string('created_by')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->string('updated_by');
+            $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
     }

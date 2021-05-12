@@ -31,6 +31,8 @@ The above copyright notice and this permission notice shall be included in all c
   <link href="{{asset('assets/css/material-dashboard.css')}}" rel="stylesheet" />
   <!--  CSS for Demo Purpose, don't include it in your project     -->
   <link href="{{asset('assets/css/demo.css')}}" rel="stylesheet" />
+   <!--  Custom CSS     -->
+  <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet" />
   <!--     Fonts and icons     -->
   <link href="{{asset('assets/css/font-awesome.css')}}" rel="stylesheet" />
   <link href="{{asset('assets/css/google-roboto-300-700.css')}}" rel="stylesheet" />
@@ -58,21 +60,51 @@ The above copyright notice and this permission notice shall be included in all c
               </a>
           </li>
           </li>
-          <li class="nav-item @yield('post')">
-            <a class="nav-link" href="{{route('post')}}">
-              <i class="material-icons">library_books</i>
-              <p>Post</p>
+          <li class="nav-item @yield('collapse_post')">
+            <a data-toggle="collapse" href="#post">
+                <i class="material-icons">library_books</i>
+                <p>Post
+                    <b class="caret"></b>
+                </p>
             </a>
+            <div class="collapse @yield('collapse_post_collasepsed')" id="post">
+                <ul class="nav">
+                    <li class="@yield('post')">
+                        <a href="{{route('post')}}">Post List</a>
+                    </li>
+                    <li class="@yield('post_review')">
+                        <a href="{{route('post_review')}}">Post Review</a>
+                    </li>
+                </ul>
+            </div>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./icons.html">
-              <i class="material-icons">settings</i>
-              <p>Web Setting</p>
+            <a data-toggle="collapse" href="#setting">
+                <i class="material-icons">settings</i>
+                <p>Setting Web
+                    <b class="caret"></b>
+                </p>
             </a>
+            <div class="collapse" id="setting">
+                <ul class="nav">
+                    <li>
+                        <a href="">Main</a>
+                    </li>
+                    <li>
+                        <a href="">Home</a>
+                    </li>
+                    <li>
+                        <a href="">Contact</a>
+                    </li>
+                    <li>
+                        <a href="">Tags</a>
+                    </li>
+                </ul>
+            </div>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./map.html">
-              <i class="material-icons">power_settings_new</i>
+            <a class="nav-link" href="/logout">
+              <i style="color: red" class="material-icons">power_settings_new</i>
               <p>Logout</p>
             </a>
           </li>
@@ -96,12 +128,37 @@ The above copyright notice and this permission notice shall be included in all c
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"> Dashboard </a>
+                        <a class="navbar-brand" href="#">  @yield('navi') </a>
                     </div>
                 </div>
             </nav>
       <!-- End Navbar -->
       @yield('content')
+      <!-- Modal Delete -->
+      <div class="modal fade" id="delete_confirmation" tabindex="-1" role="dialog" aria-labelledby="delete_confirmation" aria-hidden="true">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header flex-column">
+                        <div class="icon-box">
+                            <i class="fa fa-times"></i>
+                        </div>						
+                        <h4 class="modal-title w-100">Apakah Anda Yakin?</h4>	
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah anda ingin menghapus data ini? Data yang dihapus tidak dapat dikembalikan.</p>
+                    </div>
+                    <form action="@yield('delete')" id="delete-form" method="post">
+                        @csrf
+                        <input type=hidden id="id_delete" value="" name="id">
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+      </div>
       <footer class="footer">
         <div class="container-fluid">
           <div class="copyright float-right">
@@ -146,7 +203,7 @@ The above copyright notice and this permission notice shall be included in all c
 <!--  DataTables.net Plugin    -->
 <script src="{{asset('assets/js/jquery.datatables.js')}}"></script>
 <!-- Sweet Alert 2 plugin -->
-<script src="{{asset('assets/js/sweetalert2.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.3/dist/sweetalert2.all.min.js"></script>
 <!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
 <script src="{{asset('assets/js/jasny-bootstrap.min.js')}}"></script>
 <!--  Full Calendar Plugin    -->
@@ -155,18 +212,56 @@ The above copyright notice and this permission notice shall be included in all c
 <script src="{{asset('assets/js/jquery.tagsinput.js')}}"></script>
 <!-- Material Dashboard javascript methods -->
 <script src="{{asset('assets/js/material-dashboard.js')}}"></script>
-<!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{asset('assets/js/custom.js')}}"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        // Javascript method's body can be found in assets/js/demos.js')}}
-        demo.initDashboardPageCharts();
-
-        demo.initVectorMap();
-    });
+@if (session('notif'))
+    <script>
+        $(document).ready(function(){
+            Toast.fire({
+                icon: "{{session('alert')}}",
+                title: "{{session('notif')}}"
+            })
+        });
+    </script>
+  @endif
+@if ($errors->any()))
+    <script>
+        $(document).ready(function(){
+            Toast.fire({
+                icon: "error",
+                title: "Harap lengkapi form terlebih dahulu"
+            })
+        });
+    </script>
+  @endif
+@stack('scripts')
+<script>
+  $("#delete-form").on('submit', function(event){
+    event.preventDefault();
+    $values = $(this).serialize();
+    $id = $('#id_delete').val();
+    $table = $('#datatables').DataTable();
+    $.ajax({
+          url: $('#delete-form').attr('action'),
+          type: "post",
+          data: $values ,
+          success: function (response) {
+              console.log(response);
+              Toast.fire({
+                  icon: response['alert'],
+                  title: response['notif']
+              })
+              $("#datatables").addClass('table-loader').show();
+              $table.ajax.reload(function(){
+                $("#datatables").removeClass('table-loader').show();
+              });
+              $('#delete_confirmation').modal('hide');
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              console.log(textStatus, errorThrown);
+          }
+      });
+  });
 </script>
-  @stack('scripts')
 </body>
 
 </html>

@@ -16,16 +16,16 @@ class CreateSettingContactsTable extends Migration
     {
         Schema::create('setting_contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('text_1');
-            $table->string('text_2');
-            $table->string('phone');
-            $table->string('address');
-            $table->string('maps');
-            $table->string('whatsapp');
-            $table->string('emailphp');
-            $table->string('created_by');
+            $table->string('text_1')->nullable();
+            $table->string('text_2')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('maps')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->string('emailphp')->nullable();
+            $table->string('created_by')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->string('updated_by');
+            $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
     }

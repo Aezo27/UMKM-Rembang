@@ -16,16 +16,16 @@ class CreateSettingHomesTable extends Migration
     {
         Schema::create('setting_homes', function (Blueprint $table) {
             $table->id();
-            $table->string('text_1');
-            $table->string('text_2');
-            $table->string('text_3');
-            $table->string('text_4');
-            $table->string('slide_1');
-            $table->string('slide_2');
-            $table->string('slide_3');
-            $table->string('created_by');
+            $table->string('text_1')->nullable();
+            $table->string('text_2')->nullable();
+            $table->string('text_3')->nullable();
+            $table->string('text_4')->nullable();
+            $table->string('slide_1')->nullable();
+            $table->string('slide_2')->nullable();
+            $table->string('slide_3')->nullable();
+            $table->string('created_by')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->string('updated_by');
+            $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
     }

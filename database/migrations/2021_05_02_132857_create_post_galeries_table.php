@@ -16,17 +16,17 @@ class CreatePostGaleriesTable extends Migration
         Schema::create('post_galeries', function (Blueprint $table) {
             $table->id();
             $table->integer('id_post')->references('id')->on('posts');
-            $table->string('main_image');
-            $table->string('image_1');
-            $table->string('image_2');
-            $table->string('image_3');
-            $table->string('image_4');
-            $table->string('image_5');
-            $table->string('image_6');
-            $table->string('youtube_video');
-            $table->string('created_by');
+            $table->string('main_image')->nullable();
+            $table->string('image_1')->nullable();
+            $table->string('image_2')->nullable();
+            $table->string('image_3')->nullable();
+            $table->string('image_4')->nullable();
+            $table->string('image_5')->nullable();
+            $table->string('image_6')->nullable();
+            $table->string('youtube_video')->nullable();
+            $table->string('created_by')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->string('updated_by');
+            $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
     }

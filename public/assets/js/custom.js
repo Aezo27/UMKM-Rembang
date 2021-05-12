@@ -36,4 +36,22 @@ $().ready(function(){
     if($sidebar_responsive.length != 0){
         $sidebar_responsive.attr('data-color','green');
     }
+
+    /*//////////////////////////////////////////////////////////////////
+    [ Skleton loading effect ]*/
+    $('#datatables').on('init.dt',function() {
+        $("#datatables").removeClass('table-loader').show();
+        });
+    setTimeout(function(){
+    $('#datatables').DataTable();
+    }, 3000);
+});
+/*//////////////////////////////////////////////////////////////////
+[ Swal ]*/
+const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                showCloseButton: true,
 });
