@@ -1,14 +1,6 @@
-<!--
-=========================================================
-Material Dashboard - v2.1.2
-=========================================================
-
-Product Page: https://www.creative-tim.com/product/material-dashboard
-Copyright 2020 Creative Tim (https://www.creative-tim.com)
-Coded by Creative Tim
-
-=========================================================
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+@php
+    $main = App\Models\setting_web::first();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,10 +11,10 @@ The above copyright notice and this permission notice shall be included in all c
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <!--  Social tags      -->
-    <meta name="keywords" content="material dashboard, bootstrap material admin, bootstrap material dashboard, material design admin, material design, creative tim, html dashboard, html css dashboard, web dashboard, freebie, free bootstrap dashboard, css3 dashboard, bootstrap admin, bootstrap dashboard, frontend, responsive bootstrap dashboard, premiu material design admin">
-    <meta name="description" content="Material Dashboard PRO is a Premium Material Bootstrap Admin with a fresh, new design inspired by Google's Material Design.">
+    {{-- <meta name="keywords" content=""> --}}
+    <meta name="description" content="{{$main->description}}">
   <title>
-   @yield('judul') - {{config('app.name')}}
+   @yield('judul') - {{$main->site_name}}
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!-- Bootstrap core CSS     -->
@@ -44,13 +36,13 @@ The above copyright notice and this permission notice shall be included in all c
   <div class="wrapper ">
     <div class="sidebar" data-color="green" data-background-color="black" data-image="{{ asset('assets/img/sidebar-4.jpg')}}">
       <div class="logo">
-        <a href="{{route('admin')}}" class="simple-text logo-normal">
-          UMKM Sukses
+        <a href="{{route('home')}}" class="simple-text logo-normal">
+          {{$main->site_name}}
         </a>
       </div>
       <div class="logo logo-mini">
-          <a href="{{route('admin')}}" class="simple-text">
-              Us
+          <a href="{{route('home')}}" class="simple-text">
+              {{substr($main->site_name,0,2)}}
           </a>
       </div>
       <div class="sidebar-wrapper">
@@ -80,26 +72,29 @@ The above copyright notice and this permission notice shall be included in all c
                 </ul>
             </div>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item @yield('collapse_setting')">
             <a data-toggle="collapse" href="#setting">
                 <i class="material-icons">settings</i>
                 <p>Setting Web
                     <b class="caret"></b>
                 </p>
             </a>
-            <div class="collapse" id="setting">
+            <div class="collapse @yield('collapse_setting_collasepsed')" id="setting">
                 <ul class="nav">
-                    <li>
-                        <a href="">Main</a>
+                    <li class="@yield('main_set')">
+                        <a href="{{route('setting.main')}}">Main</a>
                     </li>
-                    <li>
+                    <li class="@yield('home_set')">
                         <a href="">Home</a>
                     </li>
-                    <li>
-                        <a href="">Contact</a>
+                    <li class="@yield('contact_set')">
+                        <a href="{{route('setting.contact')}}">Contact</a>
                     </li>
-                    <li>
+                    <li class="@yield('tags_set')">
                         <a href="">Tags</a>
+                    </li>
+                    <li class="@yield('category_set')">
+                        <a href="">Category</a>
                     </li>
                 </ul>
             </div>

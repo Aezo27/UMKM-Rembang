@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ use App\Http\Controllers\ReviewController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 // login
 // Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
@@ -51,5 +52,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('admin/post-review/add', [ReviewController::class, 'add_review'])->name('review.add_review');
     Route::post('admin/post-review/del', [ReviewController::class, 'del_review'])->name('del_review');
     Route::post('admin/post-review/edit/{id}', [ReviewController::class, 'edit_review'])->name('review.edit_review');
+    // post setting
+    Route::get('admin/setting/main', [SettingController::class, 'main'])->name('setting.main');
+    Route::post('admin/setting/main', [SettingController::class, 'save_main'])->name('setting.save_main');
+    Route::get('admin/setting/contact', [SettingController::class, 'contact'])->name('setting.contact');
+    Route::post('admin/setting/contact', [SettingController::class, 'save_contact'])->name('setting.save_contact');
 });
 

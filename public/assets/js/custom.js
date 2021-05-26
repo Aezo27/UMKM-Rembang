@@ -76,6 +76,9 @@ $().ready(function(){
     $('button[type="submit"]').on('click', function() {
         unsaved = false;
     });
+    $('input[type="submit"]').on('click', function() {
+        unsaved = false;
+    });
     // Another way to bind the event
     $(window).bind('beforeunload', function() {
         if(unsaved){
