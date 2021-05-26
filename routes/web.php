@@ -57,5 +57,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('admin/setting/main', [SettingController::class, 'save_main'])->name('setting.save_main');
     Route::get('admin/setting/contact', [SettingController::class, 'contact'])->name('setting.contact');
     Route::post('admin/setting/contact', [SettingController::class, 'save_contact'])->name('setting.save_contact');
+    Route::get('admin/setting/tags', [SettingController::class, 'tags'])->name('setting.tags');
+    Route::any('admin/setting/tags/data', [SettingController::class, 'get_tags'])->name('setting.get_tags');
+    Route::post('admin/setting/tags/delete', [SettingController::class, 'del_tags'])->name('setting.del_tags');
+    Route::any('admin/setting/cate', [SettingController::class, 'cate'])->name('setting.cate');
+    Route::any('admin/setting/cate/data', [SettingController::class, 'get_cate'])->name('setting.get_cate');
+    Route::post('admin/setting/cate/delete', [SettingController::class, 'del_cate'])->name('setting.del_cate');
+    Route::post('admin/setting/cate/add', [SettingController::class, 'add_cate'])->name('setting.add_cate');
+    
 });
 

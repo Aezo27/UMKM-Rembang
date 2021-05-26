@@ -301,6 +301,10 @@
     margin-top: 20px;
 }
 
+.min-card {
+    min-height: unset !important;
+}
+
 /* Modal Delete */
 .modal-confirm {
     color: #636363;

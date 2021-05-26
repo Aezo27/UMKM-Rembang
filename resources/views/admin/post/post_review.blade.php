@@ -286,7 +286,6 @@
   </script>
   <script type="text/javascript">
         function setFormValidation(id) {
-          console.log(id);
           if (id=='#tambahReview') {      
             $(id).validate({
                 errorPlacement: function(error, element) {

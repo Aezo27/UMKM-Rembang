@@ -143,7 +143,7 @@ class PostController extends Controller
                    $cek = tag::where('tag_name', $tag)->first();
                    if (!$cek) {
                         $ins_tag =  new tag();
-                        $ins_tag->tag_name = $tag;
+                        $ins_tag->tag_name = strtolower(ltrim($tag));
                         $ins_tag->save();
     
                         $post_tag = new post_tag();
@@ -352,7 +352,7 @@ class PostController extends Controller
                     $cek = tag::where('tag_name', $tag)->first();
                     if (!$cek) {
                         $ins_tag =  new tag();
-                        $ins_tag->tag_name = $tag;
+                        $ins_tag->tag_name = strtolower(ltrim($tag));
                         $ins_tag->save();
 
                         $post_tag = new post_tag();
@@ -374,7 +374,7 @@ class PostController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollback();
-            return $e;
+            // return $e;
             return back()->with([
                 'notif'     => 'UMKM gagal diedit!',
                 'alert'     => 'error'

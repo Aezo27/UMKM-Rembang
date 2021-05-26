@@ -91,10 +91,10 @@
                         <a href="{{route('setting.contact')}}">Contact</a>
                     </li>
                     <li class="@yield('tags_set')">
-                        <a href="">Tags</a>
+                        <a href="{{route('setting.tags')}}">Tags</a>
                     </li>
                     <li class="@yield('category_set')">
-                        <a href="">Category</a>
+                        <a href="{{route('setting.cate')}}">Category</a>
                     </li>
                 </ul>
             </div>
