@@ -20,7 +20,7 @@ class CreatePostDetailsTable extends Migration
             $table->longText('content');
             $table->string('created_by');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->string('updated_by');
+            $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
     }

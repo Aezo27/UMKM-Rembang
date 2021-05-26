@@ -11,4 +11,8 @@ class post_detail extends Model
     protected $fillable = [
         'content'
     ];
+    public function post()
+    {
+        return $this->belongsTo(post::class, 'id_post');
+    }
 }

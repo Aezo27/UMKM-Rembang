@@ -45,6 +45,51 @@ $().ready(function(){
     setTimeout(function(){
     $('#datatables').DataTable();
     }, 3000);
+
+    // Tambah Review
+    // Prepare the preview for profile picture
+        $("#wizard-picture").change(function(){
+            readURL(this);
+        });
+
+        $('.set-full-height').css('height', 'auto');
+
+         //Function to show image before upload
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    // Select2 init
+    $('.select2').select2({ width: '100%', placeholder: 'Cari...' 
+    });
+
+    /*//////////////////////////////////////////////////////////////////
+    [ Unsaved Swal ]*/
+    var unsaved = false;
+    $('button[type="submit"]').on('click', function() {
+        unsaved = false;
+    });
+    // Another way to bind the event
+    $(window).bind('beforeunload', function() {
+        if(unsaved){
+            return 'Perubahan yang anda lakukan belum disimpan!';
+        }
+        if (CKEDITOR.currentInstance.checkDirty() === true) {
+            return 'Perubahan yang anda lakukan belum disimpan!';
+        }
+    });
+
+    // Monitor dynamic inputs
+    $(document).on('change', ':input', function(){ //triggers change in all input fields including text type
+        unsaved = true;
+    });
 });
 /*//////////////////////////////////////////////////////////////////
 [ Swal ]*/
@@ -55,3 +100,20 @@ const Toast = Swal.mixin({
                 timer: 3000,
                 showCloseButton: true,
 });
+
+function swalModalConfirm(title, text, icon) {
+    Swal.fire({
+    title: title,
+    text: text,
+    icon: icon,
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#c8c8c8',
+    confirmButtonText: 'Ya!',
+    cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            alert('mantab bor!');
+        }
+    })
+}

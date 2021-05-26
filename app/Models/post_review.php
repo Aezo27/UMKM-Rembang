@@ -11,4 +11,8 @@ class post_review extends Model
     protected $fillable = [
         'reviewer_name',	'review_text',	'review_avatar'
     ];
+    public function post()
+    {
+        return $this->belongsTo(post::class, 'id_post');
+    }
 }

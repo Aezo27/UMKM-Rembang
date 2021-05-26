@@ -23,6 +23,7 @@ class CreatePostContactsTable extends Migration
             $table->string('whatsapp')->nullable();
             $table->string('instagram')->nullable();
             $table->integer('clicked')->default(0);
+            $table->string('owner');
             $table->string('created_by');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('updated_by')->nullable();

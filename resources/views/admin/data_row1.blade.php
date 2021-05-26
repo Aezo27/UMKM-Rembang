@@ -43,7 +43,7 @@
     </div>
     <div class="card-content">
         <p class="category">Calon Pelanggan</p>
-        <h3 class="card-title">100</h3>
+        <h3 class="card-title">{{$pelanggan}}</h3>
         
     </div>
     <div class="card-footer">

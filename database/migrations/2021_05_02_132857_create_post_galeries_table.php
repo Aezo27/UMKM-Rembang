@@ -16,7 +16,6 @@ class CreatePostGaleriesTable extends Migration
         Schema::create('post_galeries', function (Blueprint $table) {
             $table->id();
             $table->integer('id_post')->references('id')->on('posts');
-            $table->string('main_image')->nullable();
             $table->string('image_1')->nullable();
             $table->string('image_2')->nullable();
             $table->string('image_3')->nullable();

@@ -50,7 +50,7 @@
                         <tr baris="{{$p->id}}">
                             <td>{{$key+1}}</td>
                             <td>{{$p->title}}</td>
-                            <td></td>
+                            <td>{{$p->categories->category_name}}</td>
                             <td>{{$p->status}}</td>
                             <td class="text-right">
                                 <a href="#" class="btn btn-simple btn-info btn-icon like" data-toggle="modal" data-target="#info"><i class="material-icons">info</i></a>
@@ -101,13 +101,11 @@
             },
             {
               data: 'title',
-              name: 'nama_umkm'
+              name: 'title'
             },
             {
-              data: null,
-              render: function (data, type, row, meta) {
-                return 'unset';
-              }  
+              data: 'jenis',
+              name: 'jenis'
             },
             {
               data: 'status',

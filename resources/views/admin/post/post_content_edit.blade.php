@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('judul', 'Tambah Post')
+@section('judul', 'Edit Post')
 @section('collapse_post', 'active')
 @section('collapse_post_collasepsed', 'in')
 @section('post', 'active')
@@ -14,24 +14,24 @@
             <div class="card-header card-header-primary">
               <div class="row">
                 <div class="col-lg-6 col-md-6">
-                  <h4 class="card-title">Tambah Halaman UMKM Baru</h4>
+                  <h4 class="card-title">Edit Halaman UMKM Baru</h4>
                 </div>
               </div>
             </div>
             <div class="card-content">   
-                <form method="post" id="TypeValidation" class="form-horizontal" action="{{route('save_post')}}" novalidate enctype="multipart/form-data">
+                <form method="post" id="TypeValidation" class="form-horizontal" action="{{route('update_post', ['id' => $id])}}" novalidate enctype="multipart/form-data">
                 @csrf
                     <div class="row form-horizontal-custom">
                         <label class="col-sm-2 label-on-left">Nama UMKM</label>
                         <div class="col-sm-9">
                             <div class="form-group label-floating">
                                 <label class="control-label"></label>
-                                <input class="form-control" type="text" name="nama" required="true" >
+                                <input class="form-control" type="text" name="nama" value="{{$post->title}}" required="true" >
                             <span class="material-input"></span></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea class="ckeditor form-control" name="wysiwyg"></textarea>
+                        <textarea class="ckeditor form-control" name="wysiwyg">{{$post->post_details->content}}</textarea>
                     </div>
                     <div style="margin-top: 20px" id="opsi">
                         <div class="panel-group" id="accordion_17" role="tablist" aria-multiselectable="true">
@@ -48,52 +48,67 @@
                                         <div class="row">
                                             <div class="col-md-4 col-sm-4">
                                                 <legend>Galery 1</legend>
-                                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                <div class="fileinput {{$post->post_galeries->image_1 != null ? 'fileinput-exists' : 'fileinput-new'}} text-center" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail">
                                                         <img src="{{asset('assets/img/image_placeholder.jpg')}}" alt="...">
                                                     </div>
-                                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                    <div class="fileinput-preview fileinput-exists thumbnail">
+                                                        @if ($post->post_galeries->image_1 != null)
+                                                            <img src="{{asset('post').'/'.$post->slug.'/'.$post->post_galeries->image_1}}" alt="">
+                                                            <input type="hidden" name="img_1" value='exist'>
+                                                        @endif
+                                                    </div>
                                                     <div>
                                                         <span class="btn btn-rose btn-round btn-file">
                                                             <span class="fileinput-new">Select image</span>
                                                             <span class="fileinput-exists">Change</span>
                                                             <input type="file" name="galery1" />
                                                         </span>
-                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" onclick="delete_img()" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-sm-4">
                                                 <legend>Galery 2</legend>
-                                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                <div class="fileinput {{$post->post_galeries->image_2 != null ? 'fileinput-exists' : 'fileinput-new'}} text-center" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail">
                                                         <img src="{{asset('assets/img/image_placeholder.jpg')}}" alt="...">
                                                     </div>
-                                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                    <div class="fileinput-preview fileinput-exists thumbnail">
+                                                         @if ($post->post_galeries->image_2 != null)
+                                                            <img src="{{asset('post').'/'.$post->slug.'/'.$post->post_galeries->image_2}}" alt="">
+                                                            <input type="hidden" name="img_2" value='exist'>
+                                                        @endif
+                                                    </div>
                                                     <div>
                                                         <span class="btn btn-rose btn-round btn-file">
                                                             <span class="fileinput-new">Select image</span>
                                                             <span class="fileinput-exists">Change</span>
                                                             <input type="file" name="galery2" />
                                                         </span>
-                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" onclick="delete_img()" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-sm-4">
                                                 <legend>Galery 3</legend>
-                                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                <div class="fileinput {{$post->post_galeries->image_3 != null ? 'fileinput-exists' : 'fileinput-new'}} text-center" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail">
                                                         <img src="{{asset('assets/img/image_placeholder.jpg')}}" alt="...">
                                                     </div>
-                                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                    <div class="fileinput-preview fileinput-exists thumbnail">
+                                                         @if ($post->post_galeries->image_3 != null)
+                                                            <img src="{{asset('post').'/'.$post->slug.'/'.$post->post_galeries->image_3}}" alt="">
+                                                            <input type="hidden" name="img_3" value='exist'>
+                                                        @endif
+                                                    </div>
                                                     <div>
                                                         <span class="btn btn-rose btn-round btn-file">
                                                             <span class="fileinput-new">Select image</span>
                                                             <span class="fileinput-exists">Change</span>
                                                             <input type="file" name="galery3" />
                                                         </span>
-                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" onclick="delete_img()" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -101,52 +116,67 @@
                                         <div class="row">
                                             <div class="col-md-4 col-sm-4">
                                                 <legend>Galery 4</legend>
-                                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                <div class="fileinput {{$post->post_galeries->image_4 != null ? 'fileinput-exists' : 'fileinput-new'}} text-center" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail">
                                                         <img src="{{asset('assets/img/image_placeholder.jpg')}}" alt="...">
                                                     </div>
-                                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                    <div class="fileinput-preview fileinput-exists thumbnail">
+                                                         @if ($post->post_galeries->image_4 != null)
+                                                            <img src="{{asset('post').'/'.$post->slug.'/'.$post->post_galeries->image_4}}" alt="">
+                                                            <input type="hidden" name="img_4" value='exist'>
+                                                        @endif
+                                                    </div>
                                                     <div>
                                                         <span class="btn btn-rose btn-round btn-file">
                                                             <span class="fileinput-new">Select image</span>
                                                             <span class="fileinput-exists">Change</span>
                                                             <input type="file" name="galery4" />
                                                         </span>
-                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" onclick="delete_img()" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-sm-4">
                                                 <legend>Galery 5</legend>
-                                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                <div class="fileinput {{$post->post_galeries->image_5 != null ? 'fileinput-exists' : 'fileinput-new'}} text-center" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail">
                                                         <img src="{{asset('assets/img/image_placeholder.jpg')}}" alt="...">
                                                     </div>
-                                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                    <div class="fileinput-preview fileinput-exists thumbnail">
+                                                         @if ($post->post_galeries->image_5 != null)
+                                                            <img src="{{asset('post').'/'.$post->slug.'/'.$post->post_galeries->image_5}}" alt="">
+                                                            <input type="hidden" name="img_5" value='exist'>
+                                                        @endif
+                                                    </div>
                                                     <div>
                                                         <span class="btn btn-rose btn-round btn-file">
                                                             <span class="fileinput-new">Select image</span>
                                                             <span class="fileinput-exists">Change</span>
                                                             <input type="file" name="galery5" />
                                                         </span>
-                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" onclick="delete_img()" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-sm-4">
                                                 <legend>Galery 6</legend>
-                                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                <div class="fileinput {{$post->post_galeries->image_6 != null ? 'fileinput-exists' : 'fileinput-new'}} text-center" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail">
                                                         <img src="{{asset('assets/img/image_placeholder.jpg')}}" alt="...">
                                                     </div>
-                                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                    <div class="fileinput-preview fileinput-exists thumbnail">
+                                                         @if ($post->post_galeries->image_6 != null)
+                                                            <img src="{{asset('post').'/'.$post->slug.'/'.$post->post_galeries->image_6}}" alt="">
+                                                            <input type="hidden" name="img_6" value='exist'>
+                                                        @endif
+                                                    </div>
                                                     <div>
                                                         <span class="btn btn-rose btn-round btn-file">
                                                             <span class="fileinput-new">Select image</span>
                                                             <span class="fileinput-exists">Change</span>
                                                             <input type="file" name="galery6" />
                                                         </span>
-                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" onclick="delete_img()" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -156,7 +186,7 @@
                                             <div class="col-sm-9">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" name="yt_embed" >
+                                                    <input class="form-control" type="text" value="{{$post->post_galeries->youtube_video}}" name="yt_embed" >
                                                     <span class="help-block">Embed Youtube</span>
                                                 </div>
                                             </div>
@@ -179,7 +209,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" name="whatsapp" >
+                                                    <input class="form-control" type="text" value="{{$post->post_contacts->whatsapp}}" name="whatsapp" >
                                                     <span class="help-block">No whatsapp +62.</span>
                                                 </div>
                                             </div>
@@ -189,7 +219,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" name="phone" >
+                                                    <input class="form-control" type="text" value="{{$post->post_contacts->phone}}" name="phone" >
                                                     <span class="help-block">Nomor telfon selain WA.</span>
                                                 </div>
                                             </div>
@@ -199,7 +229,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" name="gmaps" >
+                                                    <input class="form-control" type="text" value="{{$post->post_contacts->map}}" name="gmaps" >
                                                     <span class="help-block">Googlemaps embed iframe.</span>
                                                 </div>
                                             </div>
@@ -209,7 +239,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" name="instagram" >
+                                                    <input class="form-control" type="text" value="{{$post->post_contacts->instagram}}" name="instagram" >
                                                     <span class="help-block">Akun Instagram (link).</span>
                                                 </div>
                                             </div>
@@ -219,7 +249,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" name="address" >
+                                                    <input class="form-control" type="text" value="{{$post->post_contacts->address}}" name="address" >
                                                     <span class="help-block">Alamat Lengkap.</span>
                                                 </div>
                                             </div>
@@ -229,7 +259,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" name="owner" >
+                                                    <input class="form-control" type="text" value="{{$post->post_contacts->owner}}" name="owner" >
                                                     <span class="help-block">Nama Pemilik</span>
                                                 </div>
                                             </div>
@@ -252,7 +282,11 @@
                                                 <legend>Status</legend>
                                                 <div class="togglebutton">
                                                     <label>
-                                                        <input type="checkbox" id="stts" name="stts" value="Aktif" checked><span id="switch">Aktif</span>
+                                                        @if ($post->status=='Aktif')
+                                                            <input type="checkbox" id="stts" name="stts" value="Aktif" checked><span id="switch">Aktif</span>
+                                                        @else
+                                                            <input type="checkbox" id="stts" name="stts" value="Aktif"><span id="switch">Pasif</span>
+                                                        @endif
                                                     </label>
                                                 </div>
                                             </div>
@@ -262,7 +296,7 @@
                                                 <legend>Category</legend>
                                                 <select class="selectpicker" name="category" data-style="select-with-transition" title="Pilih Kategori" data-size="7">
                                                     @foreach ($cate as $ctgr)
-                                                    <option value="{{$ctgr->id}}">{{$ctgr->category_name}}</option>
+                                                    <option value="{{$ctgr->id}}" {{$post->id_category==$ctgr->id ? 'Selected':''}}>{{$ctgr->category_name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -270,7 +304,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <legend>Tags</legend>
-                                                <input type="text" class="form-control" value="" name="tags" class="tagsinput" data-role="tagsinput" data-color="rose" />
+                                                <input type="text" class="form-control" value="@foreach ($post->tags as $tag) {{$tag->tag_name}} {{!$loop->last ? ',':''}} @endforeach" name="tags" class="tagsinput" data-role="tagsinput" data-color="rose" />
                                             </div>
                                         </div>
                                     </div>
@@ -311,5 +345,9 @@
         $(document).ready(function() {
             setFormValidation('#TypeValidation');
         });
+
+        function delete_img() {
+            $(this).parent().parent().find('input[type=hidden]').remove();
+        }
     </script>
 @endpush

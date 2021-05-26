@@ -36,6 +36,8 @@ The above copyright notice and this permission notice shall be included in all c
   <!--     Fonts and icons     -->
   <link href="{{asset('assets/css/font-awesome.css')}}" rel="stylesheet" />
   <link href="{{asset('assets/css/google-roboto-300-700.css')}}" rel="stylesheet" />
+  <!-- Select 2 -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -212,6 +214,8 @@ The above copyright notice and this permission notice shall be included in all c
 <script src="{{asset('assets/js/jquery.tagsinput.js')}}"></script>
 <!-- Material Dashboard javascript methods -->
 <script src="{{asset('assets/js/material-dashboard.js')}}"></script>
+<!-- Select2 -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
 <script src="{{asset('assets/js/custom.js')}}"></script>
 @if (session('notif'))
     <script>
@@ -240,26 +244,30 @@ The above copyright notice and this permission notice shall be included in all c
     $values = $(this).serialize();
     $id = $('#id_delete').val();
     $table = $('#datatables').DataTable();
+    $form = $(this);
+    $form.find('button[type="submit"]').attr('disabled', true);
     $.ajax({
-          url: $('#delete-form').attr('action'),
-          type: "post",
-          data: $values ,
-          success: function (response) {
-              console.log(response);
-              Toast.fire({
-                  icon: response['alert'],
-                  title: response['notif']
-              })
+        url: $('#delete-form').attr('action'),
+        type: "post",
+        data: $values,
+        success: function (response) {
+            Toast.fire({
+                icon: response['alert'],
+                title: response['notif']
+            });
+            $('#delete_confirmation').modal('hide');
+            if (response['alert'] == 'success') {
               $("#datatables").addClass('table-loader').show();
               $table.ajax.reload(function(){
                 $("#datatables").removeClass('table-loader').show();
               });
-              $('#delete_confirmation').modal('hide');
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-              console.log(textStatus, errorThrown);
-          }
-      });
+            }
+            $form.find('button[type="submit"]').removeAttr('disabled');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
   });
 </script>
 </body>
