@@ -66,7 +66,7 @@
                             <span class="input-group-addon">
                                 <i class="material-icons">library_books</i>
                             </span>
-                            <div class="form-group label-floating">
+                            <div class="form-group label-floating is-empty">
                                 <label class="control-label">Nama Kategori
                                     <small>(required)</small>
                                 </label>
@@ -238,11 +238,7 @@
             // setFormValidation('#editReview');
         });
         function resetForm() {
-          $('input[name="nama"]').val('');
-          $('textarea[name="text"]').val('');
-          $('input[name="avatar"]').val('');
-          $(".cari").empty().trigger('change')
-          $('#wizardPicturePreview').attr('src', "{{(asset('assets/img/default-avatar.png'))}}").fadeIn('slow');
+          $('input[name="category_name"]').val('');
         }
   </script>
 @endpush

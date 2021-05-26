@@ -156,7 +156,7 @@ class SettingController extends Controller
             $cate_del = Category::where('id', $request->id);
             $cate_del->delete();
             $post_cate_del =post::where('id_category', $request->id);
-            $post_cate_del->update(['id_category' => null, 'updated_by' => Auth::user()->name;]);
+            $post_cate_del->update(['id_category' => null, 'updated_by' => Auth::user()->name]);
 
             DB::commit();
             return [
@@ -176,8 +176,16 @@ class SettingController extends Controller
     {
         DB::beginTransaction();
         try {
+            $category_name = strtolower(ltrim($request->category_name));
+            $cek = Category::where('category_name', $category_name)->first();
+            if ($cek != null) {
+                return [
+                    'notif'     => 'Kategori telah ada!',
+                    'alert'     => 'error'
+                ];
+            }
             $cate = new Category();
-            $cate->category_name =  strtolower(ltrim($request->category_name));
+            $cate->category_name =  $category_name;
             $cate->created_by =  Auth::user()->name;
             $cate->save();
 
