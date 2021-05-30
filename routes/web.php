@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,9 @@ use App\Http\Controllers\SettingController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
 
 // login
 // Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
@@ -67,3 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
     
 });
 
+// user
+Route::get('/', [UserController::class, 'index'])->name('home');
+Route::get('/product', [UserController::class, 'product'])->name('user.product');
+Route::get('/product/{slug}', [UserController::class, 'single'])->name('user.single');

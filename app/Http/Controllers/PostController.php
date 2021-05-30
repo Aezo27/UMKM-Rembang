@@ -38,7 +38,7 @@ class PostController extends Controller
                     return $button;
                 })
                 ->editColumn('jenis', function ($data) {
-                    return $data->categories->category_name;
+                    return isset($data->categories->category_name) ? $data->categories->category_name : '';
                 })
                 ->rawColumns(['action'])
                 ->make(true);

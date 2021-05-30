@@ -37,7 +37,7 @@ class ReviewController extends Controller
                     return $button;
                 })
                 ->editColumn('umkm', function ($data) {
-                    return $data->post->title;
+                    return isset($data->post->title) ? $data->post->title : '';
                 })
                 ->rawColumns(['action'])
                 ->make(true);
