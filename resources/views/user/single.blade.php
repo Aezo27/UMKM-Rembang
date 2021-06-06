@@ -15,11 +15,11 @@
                 <ul>
                   <li>{{ucwords($post->post_contacts->address)}} <img class="flag" src="./single_files/af.svg" alt="" data-tippy-placement="top" data-tippy="" data-original-title="Afghanistan"></li>				  
                 </ul>
-                <h3>{{ucwords($post->title)}} <span class="utf-verified-badge" data-tippy-placement="top" data-tippy="" data-original-title="Verified"></span></h3>
+                <h3>{{ucwords($post->title)}}</span></h3>
                 @foreach ($post->tags as $tag)
                   <h5> {{ucfirst($tag->tag_name)}}</h5>
                 @endforeach
-				        <div class="utf-star-rating" data-rating="5"></div>                
+				        {{-- <div class="utf-star-rating" data-rating="5"></div>                 --}}
               </div>
             </div>
             <div class="utf-right-side">
@@ -111,7 +111,7 @@
           </div>
           <div class="utf-listings-container-part compact-list-layout"> 
             @foreach ($post_all as $ps)    
-            <a href="{{route('user.single', ['slug' => $ps->slug])}}" class="utf-job-listing utf-apply-button-item"> 
+            <a href="{{route('user.product.single', ['slug' => $ps->slug])}}" class="utf-job-listing utf-apply-button-item"> 
               <div class="utf-job-listing-details"> 
                 <div class="utf-job-listing-company-logo"> <img src="{{asset('post').'/'.$ps->slug.'/'.$post->post_galeries->image_1}}" alt="{{$ps->title}}"> </div>
                 <div class="utf-job-listing-description">
@@ -121,7 +121,7 @@
                   </div>
                 </div>
               </div>
-              <span class="bookmark-icon"></span>
+              {{-- <span class="bookmark-icon"></span> --}}
             </a>
             @endforeach
           </div>

@@ -1,5 +1,5 @@
 @extends('user.layout')
-@section('judul', 'Daftar Produk')
+@section('judul', 'Pencarian '.app('request')->input('q'))
 @section('content')
 <!-- Intro Banner  --> 
 @include('user.intro_banner')
@@ -10,10 +10,10 @@
       <div class="row">
         <div class="col-xl-12"> 
           <div class="utf-section-headline-item centered margin-top-0 margin-bottom-40">
-            <span>Daftar Produk</span>
-            <h3>Daftar Produk UMKM</h3>
-            <div class="utf-headline-display-inner-item">Daftar Produk</div>
-            <p class="utf-slogan-text">Lorem Ipsum is simply dummy text printing and type setting industry Lorem Ipsum been industry standard dummy text ever since when unknown printer took a galley.</p>
+            <span>Pencarian Produk</span>
+            <h3>{{ucwords(app('request')->input('q'))}}</h3>
+            <div class="utf-headline-display-inner-item">Pencarian Produk</div>
+            <p class="utf-slogan-text">Ditemukan {{ $count }} produk dengan kata kunci "{{app('request')->input('q')}}".</p>
           </div>
           <div class="utf-listings-container-part compact-list-layout margin-top-35"> 
             @foreach ($posts as $post)   
@@ -63,7 +63,8 @@
                 type:'POST',
                 dataType : 'html',
                 data:{
-                    skip:_totalCurrentResult
+                    skip:_totalCurrentResult,
+                    q:"{{app('request')->input('q')}}"
                 },
                 beforeSend:function(){
                    $(".spin").show();

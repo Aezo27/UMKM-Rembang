@@ -15,8 +15,9 @@ class UserController extends Controller
     }
     public function product()
     {
-        $posts = post::where('status', 'aktif')->orderBy('title', 'asc')->limit('10')->get();
-        return view('user.product', compact('posts'));
+        $posts = post::where('status', 'aktif')->limit('5')->get();
+        $count = post::where('status', 'aktif')->count();
+        return view('user.product', compact('posts', 'count'));
     }
     public function single($slug)
     {
@@ -30,5 +31,32 @@ class UserController extends Controller
         $tags = tag::all();
         $galeries = post::select('post_galeries.image_1', 'post_galeries.image_2', 'post_galeries.image_3', 'post_galeries.image_4', 'post_galeries.image_5', 'post_galeries.image_6')->join('post_galeries', 'post_galeries.id_post', '=', 'posts.id')->where('slug', $slug)->first();
         return view('user.single', compact('post', 'post_all', 'tags', 'galeries'));
+    }
+    public function loadMore(Request $request){
+        if ($request->ajax()) {
+            if ($request->q) {
+                $skip = $request->skip;
+                $take = 10;
+                $posts = Post::where('title', 'like', '%'.$request->q.'%')->skip($skip)->take($take)->get();
+                return view('user.loadmore', compact('posts'));
+            }else {
+                $skip = $request->skip;
+                $take = 10;
+                $posts = Post::where('status', 'aktif')->skip($skip)->take($take)->get();
+                return view('user.loadmore', compact('posts'));
+            }
+        } 
+    }
+    public function search(Request $request)
+    {
+        if ($request->q) {
+            $posts = post::where('status', 'aktif')->where('title', 'like', '%'.$request->q.'%')->limit('10')->get();
+            $count = post::where('status', 'aktif')->where('title', 'like', '%'.$request->q.'%')->count();
+        } else {
+            return redirect(route('user.product'));
+            // $posts = post::where('status', 'aktif')->where('title', 'like', '%unknown%')->limit('5')->get();
+            // $count = post::where('status', 'aktif')->where('title', 'like', '%unknown%')->count();
+        }
+        return view('user.search', compact('posts', 'count'));
     }
 }

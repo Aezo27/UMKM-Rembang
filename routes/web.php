@@ -71,4 +71,6 @@ Route::group(['middleware' => 'auth'], function () {
 // user
 Route::get('/', [UserController::class, 'index'])->name('home');
 Route::get('/product', [UserController::class, 'product'])->name('user.product');
-Route::get('/product/{slug}', [UserController::class, 'single'])->name('user.single');
+Route::post('/product/loadmore', [UserController::class, 'loadMore'])->name('user.product.loadmore');
+Route::get('/product/search', [UserController::class, 'search'])->name('user.product.search');
+Route::get('/product/{slug}', [UserController::class, 'single'])->name('user.product.single');
