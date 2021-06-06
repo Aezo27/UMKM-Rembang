@@ -13,7 +13,7 @@
               <div class="utf-header-details">
                 <span class="dashboard-status-button utf-job-status-item green"><i class="icon-material-outline-business-center"></i> {{ucfirst($post->categories->category_name)}}</span>
                 <ul>
-                  <li>{{ucwords($post->post_contacts->address)}} <img class="flag" src="./single_files/af.svg" alt="" data-tippy-placement="top" data-tippy="" data-original-title="Afghanistan"></li>				  
+                  <li>{{ucwords($post->post_contacts->address)}}</li>				  
                 </ul>
                 <h3>{{ucwords($post->title)}}</span></h3>
                 @foreach ($post->tags as $tag)
@@ -24,7 +24,7 @@
             </div>
             <div class="utf-right-side">
               <div class="salary-box">
-                <a target="_blank" rel="noopener noreferrer" href="{{$post->post_contacts->whatsapp != null ? 'https://wa.me/'.$post->post_contacts->whatsapp.'?text=Halo+admin%2C+saya+ingi+memesan+'.urlencode($post->title) : 'tel:'.$post->post_contacts->phone}}" class="button save-job-btn">Beli Sekarang <i class="icon-material-outline-add-shopping-cart"></i></a> 		  
+                <a target="_blank" rel="noopener noreferrer" onclick="incCount()" href="{{$post->post_contacts->whatsapp != null ? 'https://wa.me/'.$post->post_contacts->whatsapp.'?text=Halo+admin%2C+saya+ingi+memesan+'.urlencode($post->title) : 'tel:'.$post->post_contacts->phone}}" class="button save-job-btn">Beli Sekarang <i class="icon-material-outline-add-shopping-cart"></i></a> 		  
               </div>
             </div>
           </div>
@@ -47,7 +47,7 @@
           {!! $post->post_details->content !!}
           <div class="row">
             <div class="col-xl-6 col-lg-6 col-sm-12">
-              <a target="_blank" rel="noopener noreferrer" href="{{$post->post_contacts->whatsapp != null ? 'https://wa.me/'.$post->post_contacts->whatsapp.'?text=Halo+admin%2C+saya+ingi+memesan+'.urlencode($post->title) : 'tel:'.$post->post_contacts->phone}}" class="button save-job-btn">Beli Sekarang <i class="icon-material-outline-add-shopping-cart"></i></a>
+              <a target="_blank" rel="noopener noreferrer" onclick="incCount()" href="{{$post->post_contacts->whatsapp != null ? 'https://wa.me/'.$post->post_contacts->whatsapp.'?text=Halo+admin%2C+saya+ingi+memesan+'.urlencode($post->title) : 'tel:'.$post->post_contacts->phone}}" class="button save-job-btn">Beli Sekarang <i class="icon-material-outline-add-shopping-cart"></i></a>
             </div>
           </div>
           <div class="utf-detail-social-sharing margin-top-25">
@@ -96,14 +96,16 @@
           </ul>
         </div>
 		
+        @if ($post->post_contacts->map != null) 
         <div class="utf-single-page-section-aera">
           <div class="utf-boxed-list-headline-item">
             <h3><i class="icon-feather-map"></i> Maps</h3>
           </div>
           <div id="utf-single-job-map-container-item">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15820.92509291101!2d110.75605972707521!3d-7.549740912882008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a1460c4a12f27%3A0x5027a76e356b3a0!2sGonilan%2C%20Kec.%20Kartasura%2C%20Kabupaten%20Sukoharjo%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1622368791302!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            {!!$post->post_contacts->map!!}
           </div>
         </div>
+        @endif
 		
 		    <div class="utf-boxed-list-item margin-bottom-60">
           <div class="utf-boxed-list-headline-item">
@@ -113,7 +115,7 @@
             @foreach ($post_all as $ps)    
             <a href="{{route('user.product.single', ['slug' => $ps->slug])}}" class="utf-job-listing utf-apply-button-item"> 
               <div class="utf-job-listing-details"> 
-                <div class="utf-job-listing-company-logo"> <img src="{{asset('post').'/'.$ps->slug.'/'.$post->post_galeries->image_1}}" alt="{{$ps->title}}"> </div>
+                <div class="utf-job-listing-company-logo"> <img src="{{asset('post').'/'.$ps->slug.'/'.$ps->post_galeries->image_1}}" alt="{{$ps->title}}"> </div>
                 <div class="utf-job-listing-description">
                   <span class="dashboard-status-button utf-job-status-item green">{{ucfirst($ps->categories->category_name)}}</span>
                   <h3 class="utf-job-listing-title">{{ucwords($ps->title)}}</h3>
@@ -129,12 +131,12 @@
       </div>
       <!-- Sidebar -->
       <div class="col-xl-4 col-lg-4">
-        <div class="utf-sidebar-container-aera"> 
+        {{-- <div class="utf-sidebar-container-aera"> 
           <div class="utf-sidebar-widget-item">
             <div class="utf-detail-banner-add-section">
             <a href="#"><img src="{{asset('assets_user/img/banner-add-2.jpg')}}" alt="banner-add-2"></a>
             </div>
-          </div>		
+          </div>		 --}}
           
           <div class="utf-sidebar-widget-item">
             <h3>Tag</h3>
@@ -151,4 +153,20 @@
   <!-- Features Jobs / End --> 
   @endsection
   @push('scripts')
-@endpush
+  <script>
+        function incCount() {
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url:"{{route('user.product.inccount')}}",
+                type:'POST',
+                dataType : 'html',
+                data:{
+                    slug:"{{$post->slug}}"
+                },
+                success:function(response){
+                    console.log('calon pelanggan bertambah');
+                }
+            });
+        }
+  </script>
+  @endpush

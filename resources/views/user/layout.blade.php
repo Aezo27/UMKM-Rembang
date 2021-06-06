@@ -72,15 +72,18 @@
         </div>
         
         <div class="utf-right-side">
-          <div class="utf-navbar-search-form-block"> 
-            <div class="utf-intro-search-field-item">
-              <input id="intro-keywords" type="text" placeholder="Cari Produk...">
-			        <i class="icon-feather-search"></i>
-            </div>
-			      <div class="utf-intro-search-button">
-              <button class="button ripple-effect">Cari</button>
-            </div>
-          </div> 	
+            <form action="{{route('user.product.search')}}" method="GET">
+                <div class="utf-navbar-search-form-block"> 
+                    <div class="utf-intro-search-field-item">
+                        <input id="intro-keywords" type="text" name="q" placeholder="Cari Produk...">
+                        <i class="icon-feather-search"></i>
+                    </div>
+                    <div class="utf-intro-search-button">
+                        <button class="button ripple-effect">Cari</button>
+                    </div>
+                </div> 	
+            </form>
+        </div>
           <span class="mmenu-trigger">
             <button class="hamburger utf-hamburger-collapse-item" type="button"> 
               <span class="utf-hamburger-box-item">

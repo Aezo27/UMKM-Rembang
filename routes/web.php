@@ -73,4 +73,5 @@ Route::get('/', [UserController::class, 'index'])->name('home');
 Route::get('/product', [UserController::class, 'product'])->name('user.product');
 Route::post('/product/loadmore', [UserController::class, 'loadMore'])->name('user.product.loadmore');
 Route::get('/product/search', [UserController::class, 'search'])->name('user.product.search');
+Route::post('/product/inccount', [UserController::class, 'incCount'])->name('user.product.inccount');
 Route::get('/product/{slug}', [UserController::class, 'single'])->name('user.product.single');

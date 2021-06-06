@@ -26,7 +26,7 @@ class UserController extends Controller
         if ($post_all->count = 0) {
             $post_all = post::where('status', 'Aktif')->inRandomOrder()->limit('3')->get();
         }
-        $post->views = $post->views+1;
+        $post->views += 1;
         $post->save();
         $tags = tag::all();
         $galeries = post::select('post_galeries.image_1', 'post_galeries.image_2', 'post_galeries.image_3', 'post_galeries.image_4', 'post_galeries.image_5', 'post_galeries.image_6')->join('post_galeries', 'post_galeries.id_post', '=', 'posts.id')->where('slug', $slug)->first();
@@ -58,5 +58,13 @@ class UserController extends Controller
             // $count = post::where('status', 'aktif')->where('title', 'like', '%unknown%')->count();
         }
         return view('user.search', compact('posts', 'count'));
+    }
+    public function incCount(Request $request)
+    {
+        if ($request->slug) {
+            $post = post::where('slug', $request->slug)->first();
+            $post->post_contacts->clicked += 1;
+            $post->post_contacts->save();
+        }
     }
 }
