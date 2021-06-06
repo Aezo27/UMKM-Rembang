@@ -57,16 +57,16 @@
     <div id="header">
       <div class="container"> 
         <div class="utf-left-side"> 
-          <div id="logo"> <a href="{{route('home')}}"><img src="{{asset('assets_user/img/R-Project.png')}}" alt="{{$main->site_name.' logo'}}"></a> </div>
+          <div id="logo"> <a href="{{route('home')}}"><img src="{{asset('assets_user/img/logo.png')}}" alt="{{$main->site_name.' logo'}}"></a> </div>
           <nav id="navigation">
             <ul id="responsive">
               <li><a href="{{route('home')}}" class="{{ Route::currentRouteNamed('home') ? 'current' : '' }}">Home</a>
               </li>
-              <li><a href="{{route('user.product')}}" class="{{ Route::currentRouteNamed('user.product') ? 'current' : '' }}">Product</a>
+              <li><a href="{{route('user.product')}}" class="{{ Route::currentRouteNamed('user.product') ? 'current' : '' }}">Produk</a>
               </li>
-              <li><a href="partnership.html">Partership</a>
+              <li><a href="{{route('user.about')}}">Tentang Kami</a>
               </li>
-              <li><a href="contact.html">Contact</a>
+              <li><a href="{{route('user.contact')}}">Kontak</a>
               </li>
           </nav>                 
         </div>
@@ -106,32 +106,26 @@
         <div class="row">
 		  <div class="col-xl-4 col-md-12">
 			<div class="utf-footer-item-links">
-				<a href="#"><img class="footer-logo" src="{{asset('assets_user/img/R-Project.png')}}" alt=""></a>
-				<p>Lorem Ipsum is simply dummy text of printing and type setting industry. Lorem Ipsum been industry standard dummy text ever since, when unknown printer took a galley type scrambled.</p>								
+				<a href="#"><img class="footer-logo" src="{{asset('assets_user/img/logo.png')}}" alt=""></a>
+				<p>{{$main->description}}.</p>								
 			</div>
           </div>
 		  
-          <div class="col-xl-2 col-md-3 col-sm-6">
+          {{-- <div class="col-xl-2 col-md-3 col-sm-6">
             <div class="utf-footer-item-links">
               <h3>Partner</h3>
               <ul>
-                <li><a href="#"><i class="icon-feather-chevrons-right"></i> <span>Developement</span></a></li>
-                <li><a href="#"><i class="icon-feather-chevrons-right"></i> <span>Designing</span></a></li>
-                <li><a href="#"><i class="icon-feather-chevrons-right"></i> <span>Marketing</span></a></li>
-                <li><a href="#"><i class="icon-feather-chevrons-right"></i> <span>Data Analytics</span></a></li>				
-				<li><a href="#"><i class="icon-feather-chevrons-right"></i> <span>Post New Job</span></a></li>				
+                <li><a href="#"><i class="icon-feather-chevrons-right"></i> <span>Developement</span></a></li>			
               </ul>
             </div>
-          </div>         
+          </div>          --}}
           <div class="col-xl-2 col-md-3 col-sm-6">
             <div class="utf-footer-item-links">
               <h3>Quick Link</h3>
               <ul>
-                <li><a href="#"><i class="icon-feather-chevrons-right"></i> <span>Developement</span></a></li>
-                <li><a href="#"><i class="icon-feather-chevrons-right"></i> <span>Designing</span></a></li>
-                <li><a href="#"><i class="icon-feather-chevrons-right"></i> <span>Marketing</span></a></li>
-                <li><a href="#"><i class="icon-feather-chevrons-right"></i> <span>Data Analytics</span></a></li>				
-				<li><a href="#"><i class="icon-feather-chevrons-right"></i> <span>Post New Job</span></a></li>				
+                <li><a href="{{route('user.product')}}"><i class="icon-feather-chevrons-right"></i> <span>Produk</span></a></li>
+                <li><a href="{{route('user.about')}}"><i class="icon-feather-chevrons-right"></i> <span>About</span></a></li>
+                <li><a href="{{route('user.contact')}}"><i class="icon-feather-chevrons-right"></i> <span>Kontak</span></a></li>		
               </ul>
             </div>
           </div>         

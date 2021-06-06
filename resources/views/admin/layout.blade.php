@@ -84,9 +84,6 @@
                     <li class="@yield('main_set')">
                         <a href="{{route('setting.main')}}">Main</a>
                     </li>
-                    <li class="@yield('home_set')">
-                        <a href="">Home</a>
-                    </li>
                     <li class="@yield('contact_set')">
                         <a href="{{route('setting.contact')}}">Contact</a>
                     </li>

@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="card-content">
-        <h4 class="card-title">Peringkat Views UMKM</h4>
+        <h4 class="card-title">10 Peringkat Teratas Views UMKM</h4>
         <div class="card-body">
           <div class="table-responsive">
               <table class="table">

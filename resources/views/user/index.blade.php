@@ -13,7 +13,7 @@
           <span>Sedang Ramai</span>
           <h3>Produk Terlaris Saat Ini</h3>
           <div class="utf-headline-display-inner-item">Sedang Ramai</div>
-          <p class="utf-slogan-text">Lorem Ipsum is simply dummy text printing and type setting industry Lorem Ipsum been industry standard dummy text ever since when unknown printer took a galley.</p>
+          <p class="utf-slogan-text">{{$about->text_home}}.</p>
         </div>
       </div>
       @foreach ($posts as $post)

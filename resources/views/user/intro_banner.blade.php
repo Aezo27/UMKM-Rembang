@@ -1,10 +1,13 @@
+@php
+    $post = App\Models\post::all();
+@endphp
 <div class="intro-banner">
   <div class="container"> 
     <div class="row">
       <div class="col-md-12">
         <div class="utf-banner-headline-text-part">
           <h3>Temukan Produk UMKM Berkualitas Sekarang!</h3>
-          <span>Terdapat lebih dari 50 produk umkm tersedia.</span> 
+          <span>Terdapat lebih dari {{$post->count()-1}} produk umkm tersedia.</span> 
         </div>
       </div>
     </div>

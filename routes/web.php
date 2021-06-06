@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
     // post setting
     Route::get('admin/setting/main', [SettingController::class, 'main'])->name('setting.main');
     Route::post('admin/setting/main', [SettingController::class, 'save_main'])->name('setting.save_main');
+    Route::post('admin/setting/img', [SettingController::class, 'save_img'])->name('setting.save_img');
     Route::get('admin/setting/contact', [SettingController::class, 'contact'])->name('setting.contact');
     Route::post('admin/setting/contact', [SettingController::class, 'save_contact'])->name('setting.save_contact');
     Route::get('admin/setting/tags', [SettingController::class, 'tags'])->name('setting.tags');
@@ -75,3 +76,6 @@ Route::post('/product/loadmore', [UserController::class, 'loadMore'])->name('use
 Route::get('/product/search', [UserController::class, 'search'])->name('user.product.search');
 Route::post('/product/inccount', [UserController::class, 'incCount'])->name('user.product.inccount');
 Route::get('/product/{slug}', [UserController::class, 'single'])->name('user.product.single');
+
+Route::get('/contact', [UserController::class, 'contact'])->name('user.contact');
+Route::get('/about', [UserController::class, 'about'])->name('user.about');

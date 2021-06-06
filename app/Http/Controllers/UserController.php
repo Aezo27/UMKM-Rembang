@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\post;
+use App\Models\post_contact;
+use App\Models\setting_contact;
+use App\Models\setting_web;
 use App\Models\tag;
 use Illuminate\Http\Request;
 
@@ -10,8 +13,9 @@ class UserController extends Controller
 {
     public function index()
     {
+        $about = setting_web::first();
         $posts = post::where('status', 'aktif')->orderBy('views', 'desc')->limit('8')->get();
-        return view('user.index', compact('posts'));
+        return view('user.index', compact('posts', 'about'));
     }
     public function product()
     {
@@ -54,8 +58,6 @@ class UserController extends Controller
             $count = post::where('status', 'aktif')->where('title', 'like', '%'.$request->q.'%')->count();
         } else {
             return redirect(route('user.product'));
-            // $posts = post::where('status', 'aktif')->where('title', 'like', '%unknown%')->limit('5')->get();
-            // $count = post::where('status', 'aktif')->where('title', 'like', '%unknown%')->count();
         }
         return view('user.search', compact('posts', 'count'));
     }
@@ -66,5 +68,19 @@ class UserController extends Controller
             $post->post_contacts->clicked += 1;
             $post->post_contacts->save();
         }
+    }
+    public function contact()
+    {
+        $contact = setting_contact::first();
+        return view('user.contact', compact('contact'));
+    }
+    public function about()
+    {
+        $post = post::all();
+        $count = $post->count();
+        $pelanggan = post_contact::select('clicked')->sum('clicked');
+        $views = $post->sum('views');
+        $about = setting_web::first();
+        return view('user.about', compact('about', 'count', 'pelanggan', 'views'));
     }
 }

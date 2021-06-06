@@ -66,7 +66,7 @@
                                 <div class="card card-login card-hidden">
                                     <div class="card-header text-center" data-background-color="rose">
                                         <div class="social-line">
-                                            <img width="80" src="{{asset('assets/img/logo/R-Project_White.png')}}" alt="">
+                                            <img width="80" src="{{asset('assets_user/img/logo.png')}}" alt="">
                                         </div>
                                         <h4 class="card-title">Login</h4>
                                     </div>

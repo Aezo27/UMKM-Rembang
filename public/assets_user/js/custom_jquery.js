@@ -874,13 +874,15 @@
         /*----------------------------------------------------*/
         $('.utf-testimonial-carousel-block').slick({
             centerMode: true,
-            centerPadding: '18%',
+            // centerPadding: '18%',
             slidesToShow: 1,
             dots: true,
             arrows: true,
             nav: true,
             rewind: true,
+            loop: true,
             autoplayTimeout: 5000,
+            autoplay: true,
             autoplayHoverPause: true,
             adaptiveHeight: true,
             responsive: [{

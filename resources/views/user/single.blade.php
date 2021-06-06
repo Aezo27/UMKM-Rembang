@@ -50,17 +50,14 @@
               <a target="_blank" rel="noopener noreferrer" onclick="incCount()" href="{{$post->post_contacts->whatsapp != null ? 'https://wa.me/'.$post->post_contacts->whatsapp.'?text=Halo+admin%2C+saya+ingi+memesan+'.urlencode($post->title) : 'tel:'.$post->post_contacts->phone}}" class="button save-job-btn">Beli Sekarang <i class="icon-material-outline-add-shopping-cart"></i></a>
             </div>
           </div>
-          <div class="utf-detail-social-sharing margin-top-25">
+          {{-- <div class="utf-detail-social-sharing margin-top-25">
             <span><strong>Social Sharing:</strong></span>
             <ul class="margin-top-15">
               <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Facebook"><i class="icon-brand-facebook-f"></i></a></li>
               <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Twitter"><i class="icon-brand-twitter"></i></a></li>
-              <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="LinkedIn"><i class="icon-brand-linkedin-in"></i></a></li>
-              <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Google Plus"><i class="icon-brand-google-plus-g"></i></a></li>
               <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Whatsapp"><i class="icon-brand-whatsapp"></i></a></li>
-              <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Pinterest"><i class="icon-brand-pinterest-p"></i></a></li>
             </ul>
-          </div>
+          </div> --}}
         </div>
 		
         <div class="utf-single-page-section-aera">
@@ -87,12 +84,39 @@
           {!!$post->post_galeries->youtube_video!!}         
         </div>
         @endif
+
+        @if ($post->post_reviews->count() != 0)  
+        <div class="utf-single-page-section-aera">
+          <div class="utf-boxed-list-headline-item">
+            <h3><i class="icon-feather-user"></i> Review Pelanggan</h3>
+          </div>
+          <div class="utf-carousel-container-block">
+                <div class="utf-testimonial-carousel-block testimonials">
+                    @foreach ($post->post_reviews as $review)
+                    <div class="utf-carousel-review-item">
+                        <div class="utf-testimonial-box">
+                            <div class="utf-testimonial-avatar-photo"> <img src="{{asset('post').'/'.$post->slug.'/'.$review->review_avatar}}" alt=""> </div>
+                            <div class="utf-testimonial-author-utf-detail-item">
+                                <h4>{{$review->reviewer_name}}</h4>
+                            </div>
+                            {{$review->review_text}}
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+          </div>
+        </div>       
+        @endif
+
         <div class="utf-single-page-section-aera">
           <div class="utf-boxed-list-headline-item">
             <h3><i class="icon-feather-phone"></i> Contact</h3>
           </div>
           <ul class="utf-job-deatails-content-item margin-bottom-30">
-          <li><i class="icon-feather-arrow-right"></i> Morbi mattis ullamcorper velit. Phasellus gravida semper nisi nullam vel sem.</li>
+          <li><i class="icon-feather-arrow-right"></i> Telfon: <span><a href="tel:{{$post->post_contacts->phone}}" onclick="incCount()" target="_blank" rel="noopener noreferrer">{{$post->post_contacts->phone}}</a></span></li>
+          <li><i class="icon-feather-arrow-right"></i> Whatsapp: <span><a href="https://wa.me/{{$post->post_contacts->whatsapp}}" onclick="incCount()" target="_blank" rel="noopener noreferrer">{{$post->post_contacts->whatsapp}}</a></span></li>
+          <li><i class="icon-feather-arrow-right"></i> Instagram: <span><a href="{{$post->post_contacts->instagram}}" onclick="incCount()" target="_blank" rel="noopener noreferrer">{{$post->post_contacts->instagram}}</a></span></li>
+          <li><i class="icon-feather-arrow-right"></i> Alamat: {{$post->post_contacts->address}}</li>
           </ul>
         </div>
 		

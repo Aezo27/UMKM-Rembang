@@ -2860,7 +2860,7 @@ body #backtotop a {
     position: relative;
     padding-top: 60px;
     padding-bottom: 60px;
-    background-image: url(../images/page-title.jpg);
+    background-image: url(../img/bg-3.jpg);
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
@@ -9399,10 +9399,10 @@ a.apply-now-button {
 	margin-top: 15px;
 }
 .utf-testimonial-carousel-block .slick-next {
-	right: 25%;
+	right: 0 !important;
 }
 .utf-testimonial-carousel-block .slick-prev {
-	left: 25%;
+	left: 0 !important;
 }
 .utf-testimonial-carousel-block .slick-next, .utf-testimonial-carousel-block .slick-prev {
 	margin-top: 35px;

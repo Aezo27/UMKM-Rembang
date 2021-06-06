@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\post;
 use App\Models\post_tag;
 use App\Models\setting_contact;
+use App\Models\setting_home;
 use App\Models\setting_web;
 use App\Models\tag;
 use Illuminate\Http\Request;
@@ -29,6 +30,8 @@ class SettingController extends Controller
             $main->site_name = $req->site_name;
             $main->description = $req->description;
             $main->about = $req->about;
+            $main->text_about = $req->about;
+            $main->text_home = $req->home;
             $main->save();
 
             DB::commit();
@@ -72,7 +75,7 @@ class SettingController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollback();
-            return $e;
+            // return $e;
             return back()->with([
                 'notif'     => 'Contact web gagal disimpan!',
                 'alert'     => 'error'
@@ -165,7 +168,7 @@ class SettingController extends Controller
             ];
         } catch (\Exception $e) {
             DB::rollback();
-            return $e;
+            // return $e;
             return [
                 'notif'     => 'Kategori gagal dihapus!',
                 'alert'     => 'error'
@@ -202,5 +205,28 @@ class SettingController extends Controller
                 'alert'     => 'error'
             ];
         }
+    }
+    public function save_img(Request $request)
+    {
+        if ($request->file('bg1') != null) {
+            $request->file('bg1')->storeAs('assets_user/img/', 'bg-1.jpg');
+        }
+        if ($request->file('bg2') != null) {
+            $request->file('bg2')->storeAs('assets_user/img/', 'bg-2.jpg');
+        }
+        if ($request->file('bg3') != null) {
+            $request->file('bg3')->storeAs('assets_user/img/', 'bg-3.jpg');
+        }
+        if ($request->file('logo') != null) {
+            $request->file('logo')->storeAs('assets_user/img/', 'logo.png');
+
+        }
+        if ($request->file('favicon') != null) {
+            $request->file('favicon')->storeAs('assets/img/', 'favicon.png');
+        }
+        return back()->with([
+            'notif'     => 'Gambar web berhasil dirubah',
+            'alert'     => 'success'
+        ]);
     }
 }
