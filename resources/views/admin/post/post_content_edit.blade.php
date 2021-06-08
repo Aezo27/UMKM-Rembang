@@ -361,7 +361,7 @@
                         }
                         return;
                     }
-                    if ($(this).find('select').val() == null) {
+                    if ($(this).find('select').attr("selectedIndex") == 0) {
                         Toast.fire({
                             icon: "error",
                             title: "Harap pilih category terlebih dahulu!"

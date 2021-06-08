@@ -60,8 +60,16 @@ class PostController extends Controller
             // table post
             $post = new post();
             $post->title = $req->nama;
+            // cek slug
             $slug = Str::slug($req->nama);
             $count = post::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+            // return ketika ada nama kembar
+            if ($count > 0) {
+                return back()->with([
+                    'notif'     => 'UMKM gagal ditambahkan, nama sudah dipakai!',
+                    'alert'     => 'error'
+                ])->withInput();
+            }
             $post->slug = $count ? "{$slug}-{$count}" : $slug;
             $post->views = 0;
             $post->status = $req->stts == null ? 'Pasif': $req->stts;

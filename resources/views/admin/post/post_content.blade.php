@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea class="ckeditor form-control" name="wysiwyg">value="{{ old('wysiwyg') }}"</textarea>
+                        <textarea class="ckeditor form-control" name="wysiwyg">{{ old('wysiwyg') }}</textarea>
                     </div>
                     <div style="margin-top: 20px" id="opsi">
                         <div class="panel-group" id="accordion_17" role="tablist" aria-multiselectable="true">
@@ -329,7 +329,7 @@
                         }
                         return;
                     }
-                    if ($(this).find('select').val() == null) {
+                    if ($(this).find('select').attr("selectedIndex") == 0) {
                         Toast.fire({
                             icon: "error",
                             title: "Harap pilih category terlebih dahulu!"
