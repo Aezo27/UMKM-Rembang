@@ -17,7 +17,7 @@
    @yield('judul') - {{$main->site_name}}
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-
+  <meta name="viewport" content="width=device-width" />
   <!-- CSS -->
   <link rel="stylesheet" href="{{asset('assets_user/css/bootstrap-grid.css')}}">
   <link rel="stylesheet" href="{{asset('assets_user/css/icons.css')}}">
@@ -137,7 +137,7 @@
     <div class="utf-footer-copyright-item">
       <div class="container">
         <div class="row">
-          <div class="col-xl-12">Copyright &copy; <script>document.write(new Date().getFullYear());</script>| <a href="#">Aezo27 Project</a> | All Rights Reserved.</div>
+          <div class="col-xl-12">Copyright &copy; <script>document.write(new Date().getFullYear());</script>| <a href="{{route('home')}}">Aezo27 Project</a> | All Rights Reserved.</div>
         </div>
       </div>
     </div>

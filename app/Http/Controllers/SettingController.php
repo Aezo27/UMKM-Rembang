@@ -30,8 +30,8 @@ class SettingController extends Controller
             $main->site_name = $req->site_name;
             $main->description = $req->description;
             $main->about = $req->about;
-            $main->text_about = $req->about;
-            $main->text_home = $req->home;
+            $main->text_about = $req->text_about;
+            $main->text_home = $req->text_home;
             $main->save();
 
             DB::commit();
