@@ -7,13 +7,13 @@
       </div>
     </div>
     <div class="card-content">
-        <h4 class="card-title">10 Peringkat Teratas Views UMKM</h4>
+        <h4 class="card-title">10 Peringkat Teratas Views Produk UMKM</h4>
         <div class="card-body">
           <div class="table-responsive">
               <table class="table">
                   <thead class="text-primary">
                       <th>No</th>
-                      <th>Nama UMKM</th>
+                      <th>Nama Produk UMKM</th>
                       <th>Status</th>
                       <th>View</th>
                   </thead>
@@ -30,7 +30,7 @@
               </table>
               @if ($post->count() < 1)
               <div style="padding-top: 10px; text-align: center;">
-                <span>Belum ada UMKM Terdaftar</span>
+                <span>Belum ada Produk UMKM Terdaftar</span>
               </div>
               @endif
           </div>

@@ -66,7 +66,7 @@ class PostController extends Controller
             // return ketika ada nama kembar
             if ($count > 0) {
                 return back()->with([
-                    'notif'     => 'UMKM gagal ditambahkan, nama sudah dipakai!',
+                    'notif'     => 'Produk UMKM gagal ditambahkan, nama sudah dipakai!',
                     'alert'     => 'error'
                 ])->withInput();
             }
@@ -169,14 +169,14 @@ class PostController extends Controller
             }
             DB::commit();
             return redirect(route('post'))->with([
-                'notif'     => 'UMKM berhasil ditambahkan',
+                'notif'     => 'Produk UMKM berhasil ditambahkan',
                 'alert'     => 'success'
             ]);
         } catch (\Exception $e) {
             DB::rollback();
             // return $e;
             return back()->with([
-                'notif'     => 'UMKM gagal ditambahkan, cek kelengkapan data terlebih dahulu!',
+                'notif'     => 'Produk UMKM gagal ditambahkan, cek kelengkapan data terlebih dahulu!',
                 'alert'     => 'error'
             ])->withInput();
         }
@@ -210,12 +210,12 @@ class PostController extends Controller
             DB::commit();
             // // not ajax
             // return redirect(route('post'))->with([
-            //     'notif'     => 'UMKM berhasil dihapus',
+            //     'notif'     => 'Produk UMKM berhasil dihapus',
             //     'alert'     => 'success'
             // ]);
             // ajax
             return [
-                'notif'     => 'UMKM berhasil dihapus',
+                'notif'     => 'Produk UMKM berhasil dihapus',
                 'alert'     => 'success'
             ];
         } catch (\Exception $e) {
@@ -223,12 +223,12 @@ class PostController extends Controller
             return $e;
             // // not ajax
             // return back()->with([
-            //     'notif'     => 'UMKM gagal dihapus!',
+            //     'notif'     => 'Produk UMKM gagal dihapus!',
             //     'alert'     => 'error'
             // ]);
             // ajax
             return [
-                'notif'     => 'UMKM gagal dihapus!',
+                'notif'     => 'Produk UMKM gagal dihapus!',
                 'alert'     => 'error',
             ];
         }
@@ -378,14 +378,14 @@ class PostController extends Controller
             }
             DB::commit();
             return redirect(route('post'))->with([
-                'notif'     => 'UMKM berhasil diedit',
+                'notif'     => 'Produk UMKM berhasil diedit',
                 'alert'     => 'success'
             ]);
         } catch (\Exception $e) {
             DB::rollback();
             // return $e;
             return back()->with([
-                'notif'     => 'UMKM gagal diedit!',
+                'notif'     => 'Produk UMKM gagal diedit!',
                 'alert'     => 'error'
             ]);
         }

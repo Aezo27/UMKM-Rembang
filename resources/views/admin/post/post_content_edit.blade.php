@@ -14,7 +14,7 @@
             <div class="card-header card-header-primary">
               <div class="row">
                 <div class="col-lg-6 col-md-6">
-                  <h4 class="card-title">Edit Halaman UMKM Baru</h4>
+                  <h4 class="card-title">Edit Halaman Produk UMKM Baru</h4>
                 </div>
               </div>
             </div>
@@ -22,7 +22,7 @@
                 <form method="post" id="TypeValidation" class="form-horizontal" action="{{route('update_post', ['id' => $id])}}" novalidate enctype="multipart/form-data">
                 @csrf
                     <div class="row form-horizontal-custom">
-                        <label class="col-sm-2 label-on-left">Nama UMKM</label>
+                        <label class="col-sm-2 label-on-left">Nama Produk UMKM</label>
                         <div class="col-sm-9">
                             <div class="form-group label-floating">
                                 <label class="control-label"></label>
