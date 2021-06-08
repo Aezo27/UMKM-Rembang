@@ -140,7 +140,7 @@
                     <h5 class="modal-title" id="exampleModalLongTitle">Edit Review</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
-                <form action="{{route('review.add_review')}}" enctype="multipart/form-data" class="TypeValidation" id="editReview" method="post">
+                <form action="{{route('review.add_review')}}" enctype="multipart/form-data" class="TypeValidation" novalidate id="editReview" method="post">
                   @csrf
                   <div class="modal-body">
                     <div class="card wizard-card" style="box-shadow: none !important;" data-color="rose" id="wizardProfile">
@@ -286,7 +286,7 @@
   </script>
   <script type="text/javascript">
         function setFormValidation(id) {
-          if (id=='#tambahReview') {      
+          if (id=='#tambahReview') {     
             $(id).validate({
                 errorPlacement: function(error, element) {
                     $(element).parent('div').addClass('has-error');
@@ -353,7 +353,7 @@
                               title: response['notif']
                           });
                           if (response['alert'] == 'success') {
-                            $('#add').modal('hide');
+                            $('#edit').modal('hide');
                             resetForm();
                             $("#datatables").addClass('table-loader').show();
                             $table.ajax.reload(function(){
@@ -371,10 +371,10 @@
           }
         }
 
-        $(document).ready(function() {
+        // $(document).ready(function() {
             setFormValidation('#tambahReview');
-            // setFormValidation('#editReview');
-        });
+            setFormValidation('#editReview');
+        // });
         function resetForm() {
           $('input[name="nama"]').val('');
           $('textarea[name="text"]').val('');
