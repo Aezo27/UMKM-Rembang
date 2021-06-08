@@ -219,7 +219,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" value="{{$post->post_contacts->phone}}" name="phone" >
+                                                    <input class="form-control" type="text" value="{{$post->post_contacts->phone}}" required name="phone" >
                                                     <span class="help-block">Nomor telfon selain WA.</span>
                                                 </div>
                                             </div>
@@ -249,7 +249,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" value="{{$post->post_contacts->address}}" name="address" >
+                                                    <input class="form-control" type="text" value="{{$post->post_contacts->address}}" required name="address" >
                                                     <span class="help-block">Alamat Lengkap.</span>
                                                 </div>
                                             </div>
@@ -259,7 +259,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" value="{{$post->post_contacts->owner}}" name="owner" >
+                                                    <input class="form-control" type="text" value="{{$post->post_contacts->owner}}" required name="owner" >
                                                     <span class="help-block">Nama Pemilik</span>
                                                 </div>
                                             </div>
@@ -294,7 +294,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <legend>Category</legend>
-                                                <select class="selectpicker" name="category" data-style="select-with-transition" title="Pilih Kategori" data-size="7">
+                                                <select class="selectpicker" name="category" data-style="select-with-transition" title="Pilih Kategori" data-size="7" required>
                                                     @foreach ($cate as $ctgr)
                                                     <option value="{{$ctgr->id}}" {{$post->id_category==$ctgr->id ? 'Selected':''}}>{{$ctgr->category_name}}</option>
                                                     @endforeach
@@ -304,7 +304,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <legend>Tags</legend>
-                                                <input type="text" class="form-control" value="@foreach ($post->tags as $tag) {{$tag->tag_name}} {{!$loop->last ? ',':''}} @endforeach" name="tags" class="tagsinput" data-role="tagsinput" data-color="rose" />
+                                                <input type="text" class="form-control" value="@foreach ($post->tags as $tag) {{$tag->tag_name}} {{!$loop->last ? ',':''}} @endforeach" name="tags" class="tagsinput" data-role="tagsinput" data-color="rose" required />
                                             </div>
                                         </div>
                                     </div>
@@ -313,7 +313,7 @@
                         </div>
                     </div>
                     <div class="pull-right">
-                        <input type="submit" class="btn btn-next btn-fill btn-success btn-wd" name="next" value="Simpan">
+                        <input type="submit" id="save" class="btn btn-next btn-fill btn-success btn-wd" name="next" value="Simpan">
                     </div>
                 </form>
             </div>
@@ -344,6 +344,56 @@
 
         $(document).ready(function() {
             setFormValidation('#TypeValidation');
+            $('#save').on('click',function(e){
+                    if ($('#gmbr1').get(0).files.length == 0) {
+                        Toast.fire({
+                            icon: "error",
+                            title: "Galery 1 wajib diisi!"
+                        });
+                        if ($('#collapseOne_17').attr("aria-expanded") == 'false') {
+                            $('#collapseOne_17').collapse('toggle');
+                            if ($('#collapseTwo_17').attr("aria-expanded") == 'true') {
+                                $('#collapseTwo_17').collapse('toggle'); 
+                            }
+                            if ($('#collapseThree_17').attr("aria-expanded") == 'true') {
+                                $('#collapseThree_17').collapse('toggle');
+                            }
+                        }
+                        return;
+                    }
+                    if ($(this).find('select').val() == null) {
+                        Toast.fire({
+                            icon: "error",
+                            title: "Harap pilih category terlebih dahulu!"
+                        });
+                        if ($('#collapseThree_17').attr("aria-expanded") == 'false') {
+                            $('#collapseThree_17').collapse('toggle');
+                            if ($('#collapseTwo_17').attr("aria-expanded") == 'true') {
+                                $('#collapseTwo_17').collapse('toggle'); 
+                            }
+                            if ($('#collapseOne_17').attr("aria-expanded") == 'true') {
+                                $('#collapseOne_17').collapse('toggle');
+                            }
+                        }
+                        return;
+                    }
+                    if ($(this).find('input[name=tags]').val() == null) {
+                        Toast.fire({
+                            icon: "error",
+                            title: "Harap isi tags terlebih dahulu!"
+                        });
+                        if ($('#collapseThree_17').attr("aria-expanded") == 'false') {
+                            $('#collapseThree_17').collapse('toggle');
+                            if ($('#collapseTwo_17').attr("aria-expanded") == 'true') {
+                                $('#collapseTwo_17').collapse('toggle'); 
+                            }
+                            if ($('#collapseOne_17').attr("aria-expanded") == 'true') {
+                                $('#collapseOne_17').collapse('toggle');
+                            }
+                        }
+                        return;
+                    }
+                });
         });
 
         function delete_img() {

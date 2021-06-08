@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Console\Input\Input;
 
 class PostController extends Controller
 {
@@ -167,9 +168,9 @@ class PostController extends Controller
             DB::rollback();
             // return $e;
             return back()->with([
-                'notif'     => 'UMKM gagal ditambahkan!',
+                'notif'     => 'UMKM gagal ditambahkan, cek kelengkapan data terlebih dahulu!',
                 'alert'     => 'error'
-            ]);
+            ])->withInput();
         }
     }
     public function del_post(Request $req)
