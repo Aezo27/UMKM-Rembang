@@ -6,17 +6,18 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png')}}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/favicon.png')}}">
   <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png')}}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <!--  Social tags      -->
     {{-- <meta name="keywords" content=""> --}}
-    <meta name="description" content="{{$main->description}}">
+  <meta name="description" content="{{$main->description}}">
   <title>
    @yield('judul') - {{$main->site_name}}
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <meta name="viewport" content="width=device-width" />
   <!-- Bootstrap core CSS     -->
   <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
   <!--  Material Dashboard CSS    -->
@@ -155,13 +156,13 @@
       </div>
       <footer class="footer">
         <div class="container-fluid">
-          <div class="copyright float-right">
+          {{-- <div class="copyright float-right">
             &copy;
             <script>
               document.write(new Date().getFullYear())
             </script>, made with <i class="material-icons">favorite</i> by
             <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-          </div>
+          </div> --}}
         </div>
       </footer>
     </div>

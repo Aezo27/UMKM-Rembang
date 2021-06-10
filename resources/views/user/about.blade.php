@@ -55,7 +55,7 @@
                             <div class="utf-single-counter"> <i class="icon-feather-shopping-cart"></i>
                                 <div class="utf-counter-inner-item">
                                     <h3><span class="counter">{{$count}}</span></h3>
-                                    <span class="utf-counter-title">Product</span> 
+                                    <span class="utf-counter-title">Produk Terdaftar</span> 
                                 </div>
                             </div>
                         </div>	

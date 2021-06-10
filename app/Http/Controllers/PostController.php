@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Console\Input\Input;
 
 class PostController extends Controller
 {
@@ -59,8 +60,16 @@ class PostController extends Controller
             // table post
             $post = new post();
             $post->title = $req->nama;
+            // cek slug
             $slug = Str::slug($req->nama);
             $count = post::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+            // return ketika ada nama kembar
+            if ($count > 0) {
+                return back()->with([
+                    'notif'     => 'Produk UMKM gagal ditambahkan, nama sudah dipakai!',
+                    'alert'     => 'error'
+                ])->withInput();
+            }
             $post->slug = $count ? "{$slug}-{$count}" : $slug;
             $post->views = 0;
             $post->status = $req->stts == null ? 'Pasif': $req->stts;
@@ -160,16 +169,16 @@ class PostController extends Controller
             }
             DB::commit();
             return redirect(route('post'))->with([
-                'notif'     => 'UMKM berhasil ditambahkan',
+                'notif'     => 'Produk UMKM berhasil ditambahkan',
                 'alert'     => 'success'
             ]);
         } catch (\Exception $e) {
             DB::rollback();
             // return $e;
             return back()->with([
-                'notif'     => 'UMKM gagal ditambahkan!',
+                'notif'     => 'Produk UMKM gagal ditambahkan, cek kelengkapan data terlebih dahulu!',
                 'alert'     => 'error'
-            ]);
+            ])->withInput();
         }
     }
     public function del_post(Request $req)
@@ -201,12 +210,12 @@ class PostController extends Controller
             DB::commit();
             // // not ajax
             // return redirect(route('post'))->with([
-            //     'notif'     => 'UMKM berhasil dihapus',
+            //     'notif'     => 'Produk UMKM berhasil dihapus',
             //     'alert'     => 'success'
             // ]);
             // ajax
             return [
-                'notif'     => 'UMKM berhasil dihapus',
+                'notif'     => 'Produk UMKM berhasil dihapus',
                 'alert'     => 'success'
             ];
         } catch (\Exception $e) {
@@ -214,12 +223,12 @@ class PostController extends Controller
             return $e;
             // // not ajax
             // return back()->with([
-            //     'notif'     => 'UMKM gagal dihapus!',
+            //     'notif'     => 'Produk UMKM gagal dihapus!',
             //     'alert'     => 'error'
             // ]);
             // ajax
             return [
-                'notif'     => 'UMKM gagal dihapus!',
+                'notif'     => 'Produk UMKM gagal dihapus!',
                 'alert'     => 'error',
             ];
         }
@@ -369,14 +378,14 @@ class PostController extends Controller
             }
             DB::commit();
             return redirect(route('post'))->with([
-                'notif'     => 'UMKM berhasil diedit',
+                'notif'     => 'Produk UMKM berhasil diedit',
                 'alert'     => 'success'
             ]);
         } catch (\Exception $e) {
             DB::rollback();
             // return $e;
             return back()->with([
-                'notif'     => 'UMKM gagal diedit!',
+                'notif'     => 'Produk UMKM gagal diedit!',
                 'alert'     => 'error'
             ]);
         }

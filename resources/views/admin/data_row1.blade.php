@@ -24,12 +24,12 @@
       </div>
     </div>
     <div class="card-content">
-        <p class="category">Total UMKM</p>
+        <p class="category">Total Produk UMKM</p>
         <h3 class="card-title">{{$count}}</h3>
     </div>
     <div class="card-footer">
         <div class="stats">
-            <i class="material-icons text-success">add</i> <a href="{{route('add_post')}}">Tambah UMKM</a>
+            <i class="material-icons text-success">add</i> <a href="{{route('add_post')}}">Tambah Produk UMKM</a>
         </div>
     </div>
   </div>

@@ -14,7 +14,7 @@
             <div class="card-header card-header-primary">
               <div class="row">
                 <div class="col-lg-6 col-md-6">
-                  <h4 class="card-title">Tambah Halaman UMKM Baru</h4>
+                  <h4 class="card-title">Tambah Halaman Produk UMKM Baru</h4>
                 </div>
               </div>
             </div>
@@ -22,16 +22,16 @@
                 <form method="post" id="TypeValidation" class="form-horizontal" action="{{route('save_post')}}" novalidate enctype="multipart/form-data">
                 @csrf
                     <div class="row form-horizontal-custom">
-                        <label class="col-sm-2 label-on-left">Nama UMKM</label>
+                        <label class="col-sm-2 label-on-left">Nama Produk UMKM</label>
                         <div class="col-sm-9">
                             <div class="form-group label-floating">
                                 <label class="control-label"></label>
-                                <input class="form-control" type="text" name="nama" required="true" >
+                                <input class="form-control" type="text" name="nama" value="{{ old('nama') }}" required="true" >
                             <span class="material-input"></span></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea class="ckeditor form-control" name="wysiwyg"></textarea>
+                        <textarea class="ckeditor form-control" name="wysiwyg">{{ old('wysiwyg') }}</textarea>
                     </div>
                     <div style="margin-top: 20px" id="opsi">
                         <div class="panel-group" id="accordion_17" role="tablist" aria-multiselectable="true">
@@ -57,7 +57,7 @@
                                                         <span class="btn btn-rose btn-round btn-file">
                                                             <span class="fileinput-new">Select image</span>
                                                             <span class="fileinput-exists">Change</span>
-                                                            <input type="file" name="galery1" />
+                                                            <input type="file" name="galery1" id="gmbr1" required/>
                                                         </span>
                                                         <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                                     </div>
@@ -179,7 +179,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" name="whatsapp" >
+                                                    <input class="form-control" type="text" value="{{ old('whatsapp') }}" name="whatsapp" >
                                                     <span class="help-block">No whatsapp +62.</span>
                                                 </div>
                                             </div>
@@ -189,7 +189,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" name="phone" >
+                                                    <input class="form-control" type="text" name="phone" value="{{ old('phone') }}" required>
                                                     <span class="help-block">Nomor telfon selain WA.</span>
                                                 </div>
                                             </div>
@@ -209,7 +209,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" name="instagram" >
+                                                    <input class="form-control" type="text" value="{{ old('instagram') }}" name="instagram" >
                                                     <span class="help-block">Akun Instagram (link).</span>
                                                 </div>
                                             </div>
@@ -219,7 +219,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" name="address" >
+                                                    <input class="form-control" type="text" value="{{ old('address') }}" name="address" required>
                                                     <span class="help-block">Alamat Lengkap.</span>
                                                 </div>
                                             </div>
@@ -229,7 +229,7 @@
                                             <div class="col-sm-10">
                                                 <div class="form-group label-floating is-empty">
                                                     <label class="control-label"></label>
-                                                    <input class="form-control" type="text" name="owner" >
+                                                    <input class="form-control" type="text" name="owner" value="{{ old('owner') }}" required>
                                                     <span class="help-block">Nama Pemilik</span>
                                                 </div>
                                             </div>
@@ -260,7 +260,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <legend>Category</legend>
-                                                <select class="selectpicker" name="category" data-style="select-with-transition" title="Pilih Kategori" data-size="7">
+                                                <select class="selectpicker" name="category" data-style="select-with-transition" title="Pilih Kategori" data-size="7" required>
                                                     @foreach ($cate as $ctgr)
                                                     <option value="{{$ctgr->id}}">{{$ctgr->category_name}}</option>
                                                     @endforeach
@@ -270,7 +270,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <legend>Tags</legend>
-                                                <input type="text" class="form-control" value="" name="tags" class="tagsinput" data-role="tagsinput" data-color="rose" />
+                                                <input type="text" class="form-control" value="{{ old('tags') }}" name="tags" class="tagsinput" data-role="tagsinput" data-color="rose" required/>
                                             </div>
                                         </div>
                                     </div>
@@ -279,7 +279,7 @@
                         </div>
                     </div>
                     <div class="pull-right">
-                        <input type="submit" class="btn btn-next btn-fill btn-success btn-wd" name="next" value="Simpan">
+                        <input type="submit" id="save" class="btn btn-next btn-fill btn-success btn-wd" name="next" value="Simpan">
                     </div>
                 </form>
             </div>
@@ -310,6 +310,59 @@
 
         $(document).ready(function() {
             setFormValidation('#TypeValidation');
+            // $('#TypeValidation').on('submit',function(e){
+            //     e.preventDefault();
+                $('#save').on('click',function(e){
+                    if ($('#gmbr1').get(0).files.length == 0) {
+                        Toast.fire({
+                            icon: "error",
+                            title: "Galery 1 wajib diisi!"
+                        });
+                        if ($('#collapseOne_17').attr("aria-expanded") == 'false') {
+                            $('#collapseOne_17').collapse('toggle');
+                            if ($('#collapseTwo_17').attr("aria-expanded") == 'true') {
+                                $('#collapseTwo_17').collapse('toggle'); 
+                            }
+                            if ($('#collapseThree_17').attr("aria-expanded") == 'true') {
+                                $('#collapseThree_17').collapse('toggle');
+                            }
+                        }
+                        return;
+                    }
+                    if ($(this).find('select').attr("selectedIndex") == 0) {
+                        Toast.fire({
+                            icon: "error",
+                            title: "Harap pilih category terlebih dahulu!"
+                        });
+                        if ($('#collapseThree_17').attr("aria-expanded") == 'false') {
+                            $('#collapseThree_17').collapse('toggle');
+                            if ($('#collapseTwo_17').attr("aria-expanded") == 'true') {
+                                $('#collapseTwo_17').collapse('toggle'); 
+                            }
+                            if ($('#collapseOne_17').attr("aria-expanded") == 'true') {
+                                $('#collapseOne_17').collapse('toggle');
+                            }
+                        }
+                        return;
+                    }
+                    if ($(this).find('input[name=tags]').val() == null) {
+                        Toast.fire({
+                            icon: "error",
+                            title: "Harap isi tags terlebih dahulu!"
+                        });
+                        if ($('#collapseThree_17').attr("aria-expanded") == 'false') {
+                            $('#collapseThree_17').collapse('toggle');
+                            if ($('#collapseTwo_17').attr("aria-expanded") == 'true') {
+                                $('#collapseTwo_17').collapse('toggle'); 
+                            }
+                            if ($('#collapseOne_17').attr("aria-expanded") == 'true') {
+                                $('#collapseOne_17').collapse('toggle');
+                            }
+                        }
+                        return;
+                    }
+                });
+            // });
         });
     </script>
 @endpush

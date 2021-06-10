@@ -16,11 +16,11 @@
             <div class="card-header card-header-primary">
               <div class="row">
                 <div class="col-lg-6 col-md-6">
-                  <h4 class="card-title">Daftar Halaman UMKM</h4>
+                  <h4 class="card-title">Daftar Halaman Produk UMKM</h4>
                   <p class="card-category">Tambah, edit dan delete halaman</p>
                 </div>
                 <div class="col-lg-6 col-md-6 text-right">
-                  <a href="{{route('add_post')}}"><button class="btn btn-success" id="add_umkm"><i class="material-icons">add</i> Tambah UMKM</button></a>
+                  <a href="{{route('add_post')}}"><button class="btn btn-success" id="add_Produk UMKM"><i class="material-icons">add</i> Tambah Produk UMKM</button></a>
                 </div>
               </div>
             </div>
@@ -30,7 +30,7 @@
                      <thead>
                          <tr>
                              <th>No</th>
-                             <th>Nama UMKM</th>
+                             <th>Nama Produk UMKM</th>
                              <th>Jenis</th>
                              <th>Status</th>
                              <th class="disabled-sorting text-right">Actions</th>
@@ -39,7 +39,7 @@
                      <tfoot>
                          <tr>
                              <th>No</th>
-                             <th>Nama UMKM</th>
+                             <th>Nama Produk UMKM</th>
                              <th>Jenis</th>
                              <th>Status</th>
                              <th class="text-right">Action</th>
