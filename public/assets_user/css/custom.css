@@ -76,6 +76,25 @@ width: 100% !important;
     animation-name: fade;
     animation-duration: 1.5s;
 }
+/* other */
+.utf-job-listing .utf-job-listing-description {
+    padding-right: 10px;
+}
+
+/* img enlarge */
+.magnific-img img {
+    width: 100%;
+    height: auto;
+}
+
+body {
+    -webkit-overflow-scrolling: touch;
+}
+
+body.mfp-zoom-out-cur {
+    overflow: hidden;
+    -webkit-overflow-scrolling: auto;
+}
 
 @-webkit-keyframes fade {
     from {
@@ -133,5 +152,8 @@ width: 100% !important;
 @media (max-width: 1099px) {
     .utf-navbar-search-form-block {
         display: none;
+    }
+    .intro-banner, #titlebar, .single-page-header {
+         margin-top: 60px;
     }
 }

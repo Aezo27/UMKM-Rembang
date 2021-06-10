@@ -65,11 +65,15 @@
             <h3><i class="icon-line-awesome-file-picture-o"></i> Galeri</h3>
           </div>
            <div id="utf-job-deatails-content-item">
-             <div class="row">
+             <div class="row img-gallery-magnific">
               @foreach ($galeries->toArray() as $col => $img)
               @if ($img != null)   
-              <div class="col-xl-3 col-lg-3">
-                <img src="{{asset('post').'/'.$post->slug.'/'.$img}}" alt="">
+              <div class="col-xl-3 col-lg-3 col-sm-3">
+                <div class="magnific-img">
+                    <a class="image-popup-vertical-fit" href="{{asset('post').'/'.$post->slug.'/'.$img}}" title="{{$img}}">
+                        <img src="{{asset('post').'/'.$post->slug.'/'.$img}}" alt="">
+                    </a>
+                </div>
               </div>
               @endif
               @endforeach
@@ -192,5 +196,30 @@
                 }
             });
         }
+  </script>
+  <script>
+      $(document).ready(function() {
+        // $('.image-popup-vertical-fit').on('click',function {
+        //     overflow: hidden
+        // });
+        $('.image-popup-vertical-fit').magnificPopup({
+            type: 'image',
+            mainClass: 'mfp-with-zoom', 
+            gallery:{
+                enabled:true
+            },
+            zoom: {
+                enabled: true, 
+
+                duration: 300, // duration of the effect, in milliseconds
+                easing: 'ease-in-out', // CSS transition easing function
+
+                opener: function(openerElement) {
+
+                return openerElement.is('img') ? openerElement : openerElement.find('img');
+                }
+            }
+        });
+    });
   </script>
   @endpush

@@ -17,14 +17,14 @@
           </div>
           <div class="utf-listings-container-part compact-list-layout margin-top-35"> 
             @foreach ($posts as $post)   
-			      <a href="{{route('user.product.single', ['slug' => $post->slug])}}" class="utf-job-listing utf-apply-button-item product-box"> 
+			<a href="{{route('user.product.single', ['slug' => $post->slug])}}" class="utf-job-listing utf-apply-button-item product-box"> 
               <div class="utf-job-listing-details"> 
                 <div class="utf-job-listing-company-logo"> <img src="{{asset('post').'/'.$post->slug.'/'.$post->post_galeries->image_1}}" alt="{{$post->title}}"> </div>
                 <div class="utf-job-listing-description">
                   <span class="dashboard-status-button utf-job-status-item green">{{ucfirst($post->categories->category_name)}}</span>
                   <h3 class="utf-job-listing-title">{{ucwords($post->title)}}</h3>
                   <div class="utf-job-listing-footer">
-                    <p>{{strip_tags(strlen($post->post_details->content) > 250 ? substr($post->post_details->content,0,250).'...' : $post->post_details->content)}}</p>
+                    <p>{{html_entity_decode(strip_tags(strlen($post->post_details->content) > 250 ? substr($post->post_details->content,0,250).'...' : $post->post_details->content))}}</p>
                   </div>
                 </div>
                 <span class="list-apply-button ripple-effect">Selengkapnya <i class="icon-material-outline-shopping-cart"></i></span> 

@@ -1630,7 +1630,7 @@ body .utf-transparent-header-block #navigation ul li a.current, body .utf-transp
 	transition: -webkit-transform .4s ease;
 	transition: transform .4s ease;
 	transition: transform .4s ease, -webkit-transform .4s ease;
-	z-index: 1
+	/* z-index: 1 */
 }
 html.mm-opened {
 	overflow-x: hidden;
@@ -1646,7 +1646,7 @@ html.mm-background .mm-page {
 	background: inherit
 }
 #mm-blocker {
-	background: rgba(3, 2, 1, 0);
+	background: rgba(3, 2, 1, 0.5);
 	display: none;
 	width: 100%;
 	height: 100%;
@@ -15597,6 +15597,7 @@ body {
 	font-size: 16px;
 	line-height: 27px;
 	background-color: #fff;
+    overflow: auto;
 }
 body.gray {
 	background-color: #fbfbfb;
@@ -15681,7 +15682,7 @@ h3.page-title {
 	font-weight: 600;
 	color: #333;
 	position:relative;
-	z-index:9;
+	/* z-index:9; */
 }
 .utf-section-headline-item p.utf-slogan-text {
 	font-size: 16px;

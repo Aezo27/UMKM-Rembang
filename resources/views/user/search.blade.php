@@ -33,7 +33,7 @@
             </a>
             @endforeach
 		      </div>
-          @if ($count > 5)
+          @if ($count > 10)
           <div class="utf-centered-button margin-top-10 loadmore_box">
             <a href="javascript:void(0)" id="loadmore" data-totalResult="{{ $count }}" class="button utf-ripple-effect-dark utf-button-sliding-icon margin-top-20 d-flex justify-content-center" style="width: 189.266px;">
               <div class="spin" style="display: none">

@@ -30,6 +30,7 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&amp;display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" rel="stylesheet">
 </head>
 <body>
 <!--Loader-->
@@ -57,7 +58,9 @@
     <div id="header">
       <div class="container"> 
         <div class="utf-left-side"> 
-          <div id="logo"> <a href="{{route('home')}}"><img src="{{asset('assets_user/img/logo.png')}}" alt="{{$main->site_name.' logo'}}"></a> </div>
+          <div id="logo"> <a href="{{route('home')}}">
+            <img src="{{asset('assets_user/img/logo.png')}}" alt="{{$main->site_name.' logo'}}"></a>
+          </div>
           <nav id="navigation">
             <ul id="responsive">
               <li><a href="{{route('home')}}" class="{{ Route::currentRouteNamed('home') ? 'current' : '' }}">Home</a>
@@ -69,8 +72,7 @@
               <li><a href="{{route('user.contact')}}">Kontak</a>
               </li>
           </nav>                 
-        </div>
-        
+        </div>     
         <div class="utf-right-side">
             <form action="{{route('user.product.search')}}" method="GET">
                 <div class="utf-navbar-search-form-block"> 
@@ -83,8 +85,7 @@
                     </div>
                 </div> 	
             </form>
-        </div>
-          <span class="mmenu-trigger">
+            <span class="mmenu-trigger">
             <button class="hamburger utf-hamburger-collapse-item" type="button"> 
               <span class="utf-hamburger-box-item">
                 <span class="utf-hamburger-inner-item"></span> 
